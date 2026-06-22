@@ -1,0 +1,78 @@
+[build-system]
+requires      = ["hatchling"]
+build-backend = "hatchling.build"
+
+# ─────────────────────────────────────────────
+#  Package Metadata
+# ─────────────────────────────────────────────
+
+[project]
+name            = "dracula-dl"
+version         = "1.0.0"
+description     = "🧛 The Dracula — A powerful YouTube downloader CLI + TUI powered by yt-dlp"
+readme          = "README.md"
+license         = { file = "LICENSE" }
+requires-python = ">=3.10"
+
+authors = [
+  { name = "Ajaymyth", email = "javaliajayakumar8574@gmail.com" },
+]
+
+keywords = [
+  "youtube", "downloader", "yt-dlp", "cli", "tui",
+  "video", "audio", "playlist", "mp3", "mp4", "dracula"
+]
+
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Multimedia :: Video",
+  "Topic :: Internet",
+  "Topic :: Utilities",
+]
+
+# Runtime dependencies (auto-installed by pip)
+dependencies = [
+  "yt-dlp>=2024.1.1",
+  "colorama>=0.4.6",
+  "rich>=13.0.0",
+  "questionary>=2.0.0",
+]
+
+[project.urls]
+Homepage      = "https://github.com/AJAYMYTH/dracula-dl"
+Repository    = "https://github.com/AJAYMYTH/dracula-dl"
+"Bug Tracker" = "https://github.com/AJAYMYTH/dracula-dl/issues"
+
+# ─────────────────────────────────────────────
+#  Console Scripts Entry Points
+#  After pip install: user can run `dracula` or `dracula-dl` from terminal
+# ─────────────────────────────────────────────
+
+[project.scripts]
+dracula    = "dracula_dl.cli:main"
+dracula-dl = "dracula_dl.cli:main"
+
+# ─────────────────────────────────────────────
+#  Hatchling build config
+# ─────────────────────────────────────────────
+
+[tool.hatch.build.targets.wheel]
+packages = ["dracula_dl"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "dracula_dl/",
+  "README.md",
+  "LICENSE",
+  "pyproject.toml",
+  "requirements.txt",
+]
