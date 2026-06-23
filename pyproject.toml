@@ -8,7 +8,7 @@ build-backend = "hatchling.build"
 
 [project]
 name            = "dracula-dl"
-version         = "1.0.0"
+version         = "1.0.4"
 description     = "🧛 The Dracula — A powerful YouTube downloader CLI + TUI powered by yt-dlp"
 readme          = "README.md"
 license         = { file = "LICENSE" }

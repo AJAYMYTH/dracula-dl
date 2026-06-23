@@ -68,7 +68,7 @@ LOGO_LINES = [
     "  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝",
 ]
 
-TAGLINE = "🧛  The Dark Lord of Downloaders  ·  v1.0.0  ·  Powered by yt-dlp"
+TAGLINE = "🧛  The Dark Lord of Downloaders  ·  v1.0.4  ·  Powered by yt-dlp"
 
 
 def render_logo() -> Panel:
@@ -118,22 +118,26 @@ def sep():      console.print(Rule(style="dim red"))
 
 
 def ask(message: str, default: str = "") -> str:
-    suffix = f" [dim]({default})[/dim]" if default else ""
-    console.print(f"  [bold cyan]?[/bold cyan]  {message}{suffix}")
-    val = questionary.text("   ›", style=DRACULA_STYLE).ask()
+    suffix = f" ({default})" if default else ""
+    val = questionary.text(
+        f"{message}{suffix} ›",
+        style=DRACULA_STYLE,
+        qmark="🧛 ",
+    ).ask()
     if val is None:
         raise KeyboardInterrupt
     return val.strip() if val.strip() else default
 
 
 def ask_select(message: str, choices: list) -> str:
-    console.print(f"\n  [bold red]›[/bold red]  [bold white]{message}[/bold white]")
+    print()
     ans = questionary.select(
-        "",
+        message,
         choices=choices,
         style=DRACULA_STYLE,
         use_indicator=True,
-        instruction=" (↑↓ navigate  Enter select)",
+        qmark="🧛 ",
+        instruction=" (↑↓ navigate, Enter select)",
     ).ask()
     if ans is None:
         raise KeyboardInterrupt
@@ -141,9 +145,15 @@ def ask_select(message: str, choices: list) -> str:
 
 
 def ask_confirm(message: str, default: bool = False) -> bool:
-    return questionary.confirm(
-        f"  {message}", default=default, style=DRACULA_STYLE
+    ans = questionary.confirm(
+        message,
+        default=default,
+        style=DRACULA_STYLE,
+        qmark="🧛 ",
     ).ask()
+    if ans is None:
+        raise KeyboardInterrupt
+    return ans
 
 
 def get_default_dir() -> str:
@@ -360,12 +370,8 @@ def screen_video():
 
     out_dir = ask("Output folder", get_default_dir())
 
-    # optional custom format id
-    console.print()
-    use_fmt = ask_confirm("Use a specific yt-dlp format ID instead of quality?", default=False)
+    # optional custom format id (disabled per user request)
     fmt_id = None
-    if use_fmt:
-        fmt_id = ask("Enter format ID (from 'List Formats' screen)")
 
     # fetch title
     info("Fetching video info…")
@@ -622,7 +628,7 @@ def screen_about():
             ffmpeg_v = "Found"
 
     grid.add_row("Tool",         "🧛 The Dracula YouTube Downloader")
-    grid.add_row("Version",      "1.0.0")
+    grid.add_row("Version",      "1.0.4")
     grid.add_row("yt-dlp",       ytdlp_ver)
     grid.add_row("FFmpeg",       ffmpeg_v)
     grid.add_row("Python",       platform.python_version())
@@ -716,6 +722,7 @@ def run_tui():
             choices=MENU_CHOICES,
             style=DRACULA_STYLE,
             use_indicator=True,
+            qmark="",
             instruction=" (↑↓ to move  Enter to select)",
         ).ask()
 

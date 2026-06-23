@@ -54,6 +54,14 @@ except ImportError:
     except Exception as _tui_err:
         _tui = None
 
+try:
+    from dracula_dl import __version__
+except ImportError:
+    try:
+        from __init__ import __version__
+    except ImportError:
+        __version__ = "1.0.4"
+
 # ─────────────────────────────────────────────
 #  ASCII ART HEADER
 # ─────────────────────────────────────────────
@@ -68,7 +76,7 @@ DRACULA_LOGO = r"""
   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
 {}
   ╔══════════════════════════════════════════════════════════╗
-  ║   🧛 The Dracula  ·  YouTube Downloader CLI  v1.0.0    ║
+  ║   🧛 The Dracula  ·  YouTube Downloader CLI  v1.0.4    ║
   ║      Powered by yt-dlp  ·  Rising from the dark...     ║
   ╚══════════════════════════════════════════════════════════╝
 {}
@@ -532,6 +540,8 @@ Examples:
   python dracula.py formats -u URL
 """
     )
+
+    parser.add_argument('-v', '--version', action='version', version=f'%(prog)s {__version__}')
 
     sub = parser.add_subparsers(dest='command', metavar='COMMAND')
 

@@ -8,7 +8,7 @@
   ██████╔╝██║  ██║██║  ██║╚██████╗╚██████╔╝███████╗██║  ██║
   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
   ╔══════════════════════════════════════════════════════════╗
-  ║   🧛 The Dracula  ·  YouTube Downloader CLI  v1.0.0    ║
+  ║   🧛 The Dracula  ·  YouTube Downloader CLI  v1.0.4    ║
   ║      Powered by yt-dlp  ·  Rising from the dark...     ║
   ╚══════════════════════════════════════════════════════════╝
 ```
@@ -31,10 +31,29 @@
 
 ---
 
-## 📦 Installation
+## 📦 Installation & Update
 
-### 1. Install Python dependencies
+### 1. Install via PyPI (Recommended)
 
+To install the latest version of **The Dracula** globally from PyPI, run:
+```bash
+pip install dracula-dl
+```
+> [!NOTE]
+> Unlike `npm` which uses `@latest` to install the latest package version, Python's `pip` installs the latest version by default.
+
+### 2. Upgrade to the Latest Version
+
+To upgrade an existing installation to the latest version, run:
+```bash
+pip install --upgrade dracula-dl
+```
+> [!NOTE]
+> `pip` does not have a separate `upgrade` subcommand; instead, it uses the `--upgrade` (or `-U`) flag to fetch the latest version.
+
+### 3. Install from Source (Local Development)
+
+If you are running or developing from the source repository:
 ```bash
 pip install -r requirements.txt
 ```
@@ -67,13 +86,17 @@ sudo apt install ffmpeg
 
 ### Interactive Mode (recommended for beginners)
 
-Just run without any arguments:
+If you installed via **pip**, just run:
+```bash
+dracula
+```
 
+If you are running directly from the **source code**:
 ```bash
 python dracula.py
 ```
 
-You'll get a full menu to choose from.
+You'll get a full interactive TUI menu to guide you.
 
 ---
 
@@ -174,12 +197,22 @@ Use `-o <path>` to change the output directory for any command.
 
 ## 🧛 The Dracula Commands Summary
 
+If installed via **pip**:
+```bash
+dracula                                 # Interactive menu
+dracula video    -u URL                 # Download video
+dracula audio    -u URL                 # Download audio only
+dracula playlist -u URL                 # Download playlist
+dracula formats  -u URL                 # List formats
 ```
-python dracula.py                        → Interactive menu
-python dracula.py video   -u URL         → Download video
-python dracula.py audio   -u URL         → Download audio only
-python dracula.py playlist -u URL        → Download playlist
-python dracula.py formats  -u URL        → List formats
+
+If running from the **source code**:
+```bash
+python dracula.py                       # Interactive menu
+python dracula.py video    -u URL       # Download video
+python dracula.py audio    -u URL       # Download audio only
+python dracula.py playlist -u URL       # Download playlist
+python dracula.py formats  -u URL       # List formats
 ```
 
 ---
