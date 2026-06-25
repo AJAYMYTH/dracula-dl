@@ -1,0 +1,76 @@
+---
+interface Tab {
+  label: string;
+  value: string;
+  icon?: string;
+}
+
+interface Props {
+  tabs: Tab[];
+  defaultValue: string;
+  class?: string;
+}
+
+const { tabs, defaultValue, class: className = '' } = Astro.props;
+---
+
+<div class:list={['tabs-container', className]} data-default={defaultValue}>
+  <div class="tabs-list flex items-center gap-0.5 border-b border-hairline/60 bg-canvas-soft-2/50 rounded-t-xl px-1 pt-1">
+    {tabs.map((tab) => (
+      <button
+        class:list={[
+          'tab-trigger flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-medium rounded-t-lg transition-all duration-200 border border-transparent border-b-0 -mb-px',
+          tab.value === defaultValue
+            ? 'bg-canvas-soft text-ink border-hairline/60'
+            : 'text-body hover:text-ink hover:bg-canvas-soft/50',
+        ]}
+        data-tab={tab.value}
+      >
+        {tab.icon && <span class="text-sm">{tab.icon}</span>}
+        {tab.label}
+      </button>
+    ))}
+  </div>
+  <div class="tabs-content">
+    <slot />
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.tabs-container').forEach((container) => {
+    const triggers = container.querySelectorAll('.tab-trigger');
+    const panels = container.querySelectorAll('.tab-panel');
+    const defaultValue = container.getAttribute('data-default');
+
+    function activateTab(value: string) {
+      triggers.forEach((trigger) => {
+        const tabValue = trigger.getAttribute('data-tab');
+        if (tabValue === value) {
+          trigger.classList.add('bg-canvas-soft', 'text-ink', 'border-hairline/60');
+          trigger.classList.remove('text-body');
+        } else {
+          trigger.classList.remove('bg-canvas-soft', 'text-ink', 'border-hairline/60');
+          trigger.classList.add('text-body');
+        }
+      });
+
+      panels.forEach((panel) => {
+        const panelValue = panel.getAttribute('data-panel');
+        if (panelValue === value) {
+          panel.classList.remove('hidden');
+        } else {
+          panel.classList.add('hidden');
+        }
+      });
+    }
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const value = trigger.getAttribute('data-tab');
+        if (value) activateTab(value);
+      });
+    });
+
+    if (defaultValue) activateTab(defaultValue);
+  });
+</script>

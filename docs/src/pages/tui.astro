@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="TUI Guide" description="Interactive terminal UI guide for The Dracula YouTube downloader.">
+  <div class="max-w-[720px] mx-auto px-6 py-16">
+    <div class="mb-12" data-animate>
+      <p class="font-mono text-[11px] text-dracula-red uppercase tracking-widest mb-4">Guide</p>
+      <h1 class="text-[36px] md:text-[42px] font-bold tracking-[-0.025em] text-ink mb-4">TUI Guide</h1>
+      <p class="text-[16px] text-body leading-[1.7]">The Dracula features a rich terminal user interface with colored progress bars, ASCII art, and interactive menus.</p>
+    </div>
+
+    <!-- ASCII Art -->
+    <section class="mb-14" data-animate>
+      <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink mb-4">The Experience</h2>
+      <p class="text-[14px] text-body leading-[1.7] mb-5">When you launch The Dracula, you're greeted with a full ASCII art header and interactive menu:</p>
+      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-6 overflow-x-auto group hover:border-dracula-red/20 transition-all duration-300">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
+          <span class="ml-2 text-[11px] font-mono text-muted">dracula — interactive mode</span>
+        </div>
+        <pre class="text-[11px] md:text-[12px] font-mono text-dracula-red/90 leading-[1.4]"><code>  ██████╗ ██████╗  █████╗  ██████╗██╗   ██╗██╗      █████╗
+  ██╔══██╗██╔══██╗██╔══██╗██╔════╝██║   ██║██║     ██╔══██╗
+  ██║  ██║██████╔╝███████║██║     ██║   ██║██║     ███████║
+  ██║  ██║██╔══██╗██╔══██║██║     ██║   ██║██║     ██╔══██║
+  ██████╔╝██║  ██║██║  ██║╚██████╗╚██████╔╝███████╗██║  ██║
+  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝</code></pre>
+        <pre class="text-[13px] font-mono text-body mt-3 leading-[1.6]"><code>  🧛 <span class="text-ink font-semibold">The Dracula</span>  ·  YouTube Downloader CLI  <span class="text-dracula-red">v1.0.4</span>
+     Powered by yt-dlp  ·  Rising from the dark...</code></pre>
+      </div>
+    </section>
+
+    <!-- Interactive Menu -->
+    <section class="mb-14" data-animate>
+      <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink mb-4">Interactive Menu</h2>
+      <p class="text-[14px] text-body leading-[1.7] mb-5">The menu-driven mode guides you through each operation step by step:</p>
+      <div class="space-y-3">
+        {[
+          { num: '1', title: 'Download Video', desc: 'Paste a YouTube URL, select quality, and download.' },
+          { num: '2', title: 'Download Audio', desc: 'Extract audio in your preferred format and bitrate.' },
+          { num: '3', title: 'Download Playlist', desc: 'Download entire playlists with range selection.' },
+          { num: '4', title: 'List Formats', desc: 'View all available formats and quality options.' },
+        ].map((item) => (
+          <div class="bg-canvas-soft-2 border border-hairline/60 rounded-xl p-5 flex items-start gap-4 hover:border-dracula-red/20 hover:shadow-card transition-all duration-300 group">
+            <span class="bg-dracula-red/10 border border-dracula-red/20 text-dracula-red text-[12px] font-mono font-bold px-2.5 py-1 rounded-lg shrink-0 group-hover:bg-dracula-red/20 transition-colors">{item.num}</span>
+            <div>
+              <p class="text-[15px] font-semibold text-ink mb-1">{item.title}</p>
+              <p class="text-[13px] text-body leading-[1.6]">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Progress Bars -->
+    <section class="mb-14" data-animate>
+      <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink mb-4">Progress Display</h2>
+      <p class="text-[14px] text-body leading-[1.7] mb-5">Real-time progress bars with download speed, ETA, and file size:</p>
+      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-6 group hover:border-dracula-red/20 transition-all duration-300">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
+          <span class="ml-2 text-[11px] font-mono text-muted">downloading</span>
+        </div>
+        <pre class="text-[13px] font-mono leading-[1.8]"><code><span class="text-dracula-cyan">Downloading:</span> <span class="text-ink">My Video Title.mp4</span>
+<span class="text-dracula-green">[████████████████████░░░░░░░░░░]</span> <span class="text-body">65%</span> · <span class="text-muted">23.4 MB/36.0 MB</span> · <span class="text-dracula-orange">2.1 MB/s</span> · <span class="text-dracula-pink">ETA 0:06</span></code></pre>
+      </div>
+    </section>
+
+    <!-- Color Scheme -->
+    <section data-animate>
+      <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink mb-4">Color Scheme</h2>
+      <p class="text-[14px] text-body leading-[1.7] mb-5">The Dracula uses a dark theme with vibrant accent colors:</p>
+      <div class="grid grid-cols-2 gap-3">
+        {[
+          { color: 'bg-dracula-cyan', name: 'Cyan', use: 'prompts' },
+          { color: 'bg-dracula-green', name: 'Green', use: 'progress' },
+          { color: 'bg-dracula-red', name: 'Red', use: 'errors' },
+          { color: 'bg-dracula-purple', name: 'Purple', use: 'headers' },
+          { color: 'bg-dracula-orange', name: 'Orange', use: 'speeds' },
+          { color: 'bg-dracula-pink', name: 'Pink', use: 'estimates' },
+        ].map((item) => (
+          <div class="bg-canvas-soft-2 border border-hairline/60 rounded-xl p-4 hover:border-dracula-red/20 transition-all duration-300">
+            <div class={`w-full h-3 rounded-full ${item.color} mb-3 opacity-80`}></div>
+            <p class="text-[13px] font-mono text-ink">{item.name}</p>
+            <p class="text-[12px] text-muted mt-0.5">{item.use}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>

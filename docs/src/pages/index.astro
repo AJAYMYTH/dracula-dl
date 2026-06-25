@@ -1,0 +1,135 @@
+---
+import Base from '../layouts/Base.astro';
+import SpotlightCard from '../components/SpotlightCard.astro';
+import NebulaFlow from '../components/NebulaFlow.astro';
+---
+
+<Base title="Home">
+  <!-- Hero -->
+  <section class="relative overflow-hidden pt-24 pb-20 px-6 min-h-[600px] flex items-center">
+    <NebulaFlow
+      colors={['#1a0a2e', '#2d1b4e', '#ff2d55']}
+      speed={0.8}
+      scale={1.2}
+      density={0.6}
+      interactive={true}
+      class="opacity-60"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-canvas/30 via-transparent to-canvas pointer-events-none"></div>
+
+    <div class="max-w-[900px] mx-auto text-center relative z-10">
+      <div class="inline-flex items-center gap-2 bg-canvas-soft-2/80 border border-hairline/60 rounded-full px-4 py-1.5 mb-8 animate-fade-in-down">
+        <span class="w-2 h-2 rounded-full bg-dracula-green animate-pulse"></span>
+        <span class="font-mono text-[12px] text-body">v1.0.4</span>
+        <span class="text-hairline-strong">·</span>
+        <span class="text-[12px] text-body">Powered by yt-dlp</span>
+      </div>
+
+      <h1 class="text-[44px] md:text-[68px] font-bold leading-[1.05] tracking-[-0.03em] text-ink mb-6 hero-text">
+        <span class="hero-line">Download YouTube videos</span>
+        <br class="hidden sm:block" />
+        <span class="hero-line bg-gradient-to-r from-dracula-red via-dracula-pink to-dracula-purple bg-clip-text text-transparent">from your terminal.</span>
+      </h1>
+
+      <p class="text-[17px] text-body max-w-[520px] mx-auto mb-10 leading-[1.7] hero-subtitle">
+        The Dracula is a powerful CLI + TUI for downloading videos, audio, and playlists. Dark-themed, fast, and built for developers.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-300">
+        <a href="/installation" class="group bg-dracula-red text-white text-[15px] font-semibold px-7 py-3.5 rounded-xl hover:bg-dracula-red-deep transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,45,85,0.4)] hover:-translate-y-0.5 no-underline flex items-center gap-2">
+          Get Started
+          <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+        <a href="/cli" class="bg-canvas-soft-2 text-ink text-[15px] font-semibold px-7 py-3.5 rounded-xl border border-hairline/60 hover:border-dracula-red/40 hover:bg-canvas-soft-2/80 transition-all duration-300 hover:-translate-y-0.5 no-underline">
+          View CLI Docs
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Install Preview -->
+  <section class="px-6 pb-24">
+    <div class="max-w-[680px] mx-auto animate-fade-in-up delay-400">
+      <SpotlightCard class="overflow-x-auto shadow-elevated">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-3 h-3 rounded-full bg-dracula-red/60"></div>
+          <div class="w-3 h-3 rounded-full bg-dracula-orange/60"></div>
+          <div class="w-3 h-3 rounded-full bg-dracula-green/60"></div>
+          <span class="ml-3 text-[11px] font-mono text-muted">terminal</span>
+        </div>
+        <pre class="text-[14px] font-mono text-ink/80 leading-[1.7]"><code><span class="text-dracula-green">$</span> pip install dracula-dl
+<span class="text-dracula-green">$</span> dracula
+
+<span class="text-muted">  🧛 The Dracula  ·  YouTube Downloader CLI  v1.0.4
+     Powered by yt-dlp  ·  Rising from the dark...</span></code></pre>
+      </SpotlightCard>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="px-6 pb-28">
+    <div class="max-w-[1400px] mx-auto">
+      <div class="text-center mb-14" data-animate>
+        <h2 class="text-[32px] md:text-[40px] font-bold tracking-[-0.02em] text-ink mb-3">Everything you need.</h2>
+        <p class="text-[16px] text-body max-w-[480px] mx-auto leading-[1.6]">Download videos, extract audio, manage playlists — all from the command line.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {[
+          { icon: '🎬', title: 'Video Download', desc: 'Download any YouTube video with quality selection from 360p to 4K.' },
+          { icon: '🎵', title: 'Audio Extract', desc: 'Extract audio as MP3, M4A, WAV, FLAC, or OPUS with configurable bitrate.' },
+          { icon: '📋', title: 'Playlist Support', desc: 'Download entire playlists with range selection and automatic file naming.' },
+          { icon: '🎨', title: 'Rich TUI', desc: 'Colored progress bars, ASCII art header, and interactive menu-driven mode.' },
+          { icon: '📊', title: 'Format Lister', desc: 'View all available formats, resolutions, codecs, and file sizes before downloading.' },
+          { icon: '🖥️', title: 'Interactive Mode', desc: 'Menu-driven TUI for beginners — no command-line arguments needed.' },
+        ].map((f) => (
+          <SpotlightCard data-animate>
+            <div class="w-11 h-11 rounded-xl bg-dracula-red/10 border border-dracula-red/20 flex items-center justify-center mb-4 group-hover:bg-dracula-red/20 transition-colors duration-300">
+              <span class="text-lg">{f.icon}</span>
+            </div>
+            <h3 class="text-[16px] font-semibold text-ink mb-2">{f.title}</h3>
+            <p class="text-[14px] text-body leading-[1.6]">{f.desc}</p>
+          </SpotlightCard>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Start -->
+  <section class="px-6 pb-28">
+    <div class="max-w-[1400px] mx-auto" data-animate>
+      <SpotlightCard class="p-8 md:p-12 !rounded-3xl">
+        <div class="absolute top-0 right-0 w-[300px] h-[300px] bg-dracula-red/[0.04] rounded-full blur-[80px] pointer-events-none"></div>
+        <h2 class="text-[28px] font-bold tracking-[-0.02em] text-ink mb-2 relative">Quick Start</h2>
+        <p class="text-[16px] text-body mb-8 relative">Get up and running in two commands.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
+          <div class="bg-canvas-soft-2 border border-hairline/50 rounded-xl p-5 hover:border-dracula-red/20 transition-all duration-300">
+            <p class="font-mono text-[11px] text-dracula-red uppercase tracking-widest mb-3">Install</p>
+            <pre class="text-[14px] font-mono text-ink/80"><code><span class="text-dracula-green">$</span> pip install dracula-dl</code></pre>
+          </div>
+          <div class="bg-canvas-soft-2 border border-hairline/50 rounded-xl p-5 hover:border-dracula-red/20 transition-all duration-300">
+            <p class="font-mono text-[11px] text-dracula-red uppercase tracking-widest mb-3">Run</p>
+            <pre class="text-[14px] font-mono text-ink/80"><code><span class="text-dracula-green">$</span> dracula</code></pre>
+          </div>
+        </div>
+        <p class="text-[14px] text-body mt-6 relative">Requires Python 3.10+ and FFmpeg for audio extraction.</p>
+      </SpotlightCard>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-6 pb-16">
+    <div class="max-w-[700px] mx-auto text-center" data-animate>
+      <SpotlightCard class="!rounded-3xl p-10 md:p-14">
+        <div class="absolute inset-0 bg-gradient-to-br from-dracula-red/10 via-transparent to-dracula-purple/5 rounded-3xl pointer-events-none"></div>
+        <div class="absolute inset-0 bg-dracula-red/[0.03] rounded-3xl animate-glow-pulse pointer-events-none"></div>
+        <h2 class="text-[28px] font-bold tracking-[-0.02em] text-ink mb-3 relative">Ready to download?</h2>
+        <p class="text-[16px] text-body mb-8 relative">Join developers who use The Dracula every day.</p>
+        <a href="/installation" class="relative inline-flex items-center gap-2 bg-dracula-red text-white text-[15px] font-semibold px-8 py-3.5 rounded-xl hover:bg-dracula-red-deep transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,45,85,0.4)] hover:-translate-y-0.5 no-underline">
+          Start Downloading
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+      </SpotlightCard>
+    </div>
+  </section>
+</Base>

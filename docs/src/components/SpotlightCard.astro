@@ -1,0 +1,11 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['group relative overflow-hidden rounded-2xl border border-hairline/50 bg-canvas-soft p-6 transition-all duration-500 hover:border-dracula-red/30 hover:shadow-card-hover hover:-translate-y-1', className]}>
+  <slot />
+</div>

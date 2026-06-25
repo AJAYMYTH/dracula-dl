@@ -1,0 +1,119 @@
+---
+import Base from '../layouts/Base.astro';
+import CodeTabs from '../components/CodeTabs.astro';
+---
+
+<Base title="Installation" description="Install The Dracula YouTube downloader CLI on any platform.">
+  <div class="max-w-[720px] mx-auto px-6 py-16">
+    <div class="mb-12" data-animate>
+      <p class="font-mono text-[11px] text-dracula-red uppercase tracking-widest mb-4">Getting Started</p>
+      <h1 class="text-[36px] md:text-[42px] font-bold tracking-[-0.025em] text-ink mb-4">Installation</h1>
+      <p class="text-[16px] text-body leading-[1.7]">Install The Dracula on your system in a few steps.</p>
+    </div>
+
+    <!-- PyPI -->
+    <section class="mb-14" data-animate>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-dracula-red/10 border border-dracula-red/20 flex items-center justify-center text-dracula-red text-[14px] font-bold">1</div>
+        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Install via PyPI</h2>
+      </div>
+      <p class="text-[14px] text-body leading-[1.7] mb-4">The recommended way to install The Dracula globally:</p>
+
+      <CodeTabs
+        blocks={[
+          { label: 'Install', value: 'pip install dracula-dl', lang: 'bash', icon: '$' },
+          { label: 'Upgrade', value: 'pip install --upgrade dracula-dl', lang: 'bash', icon: '$' },
+        ]}
+        defaultValue="pip install dracula-dl"
+        class="mb-4"
+      />
+    </section>
+
+    <!-- Source -->
+    <section class="mb-14" data-animate>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-dracula-red/10 border border-dracula-red/20 flex items-center justify-center text-dracula-red text-[14px] font-bold">2</div>
+        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Install from Source</h2>
+      </div>
+      <p class="text-[14px] text-body leading-[1.7] mb-4">For local development or running from source:</p>
+
+      <CodeTabs
+        blocks={[
+          {
+            label: 'Git Clone',
+            value: `git clone https://github.com/AJAYMYTH/dracula-dl.git
+cd dracula-dl
+pip install -r requirements.txt`,
+            lang: 'bash',
+            icon: '$',
+          },
+          {
+            label: 'pipx',
+            value: `pip install pipx
+pipx install git+https://github.com/AJAYMYTH/dracula-dl.git`,
+            lang: 'bash',
+            icon: '$',
+          },
+        ]}
+      />
+    </section>
+
+    <!-- FFmpeg -->
+    <section class="mb-14" data-animate>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-dracula-red/10 border border-dracula-red/20 flex items-center justify-center text-dracula-red text-[14px] font-bold">3</div>
+        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Install FFmpeg</h2>
+      </div>
+      <p class="text-[14px] text-body leading-[1.7] mb-4">FFmpeg is required for audio extraction and video merging.</p>
+
+      <CodeTabs
+        blocks={[
+          { label: 'Windows', value: 'winget install --id=Gyan.FFmpeg -e', lang: 'bash', icon: '🪟' },
+          { label: 'macOS', value: 'brew install ffmpeg', lang: 'bash', icon: '' },
+          { label: 'Linux', value: 'sudo apt install ffmpeg', lang: 'bash', icon: '' },
+        ]}
+      />
+    </section>
+
+    <!-- Verify -->
+    <section class="mb-14" data-animate>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-dracula-red/10 border border-dracula-red/20 flex items-center justify-center text-dracula-red text-[14px] font-bold">4</div>
+        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Verify Installation</h2>
+      </div>
+      <p class="text-[14px] text-body leading-[1.7] mb-4">After installation, verify everything works:</p>
+
+      <CodeTabs
+        blocks={[
+          {
+            label: 'Verify',
+            value: `# Check The Dracula
+dracula --help
+
+# Check FFmpeg
+ffmpeg -version`,
+            lang: 'bash',
+            icon: '$',
+          },
+        ]}
+      />
+    </section>
+
+    <!-- Requirements -->
+    <section data-animate>
+      <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink mb-4">Requirements</h2>
+      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5">
+        <ul class="space-y-3">
+          {['Python 3.10+', 'yt-dlp (auto-installed)', 'colorama (auto-installed)', 'FFmpeg (for audio extraction and video merging)'].map((req) => (
+            <li class="flex items-center gap-3 text-[14px] text-body">
+              <span class="w-5 h-5 rounded-full bg-dracula-red/10 border border-dracula-red/20 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-dracula-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              {req}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </div>
+</Base>

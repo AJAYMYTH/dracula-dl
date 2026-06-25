@@ -1,0 +1,149 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="CLI Usage" description="Learn how to use The Dracula command-line interface.">
+  <div class="max-w-[720px] mx-auto px-6 py-16">
+    <div class="mb-12" data-animate>
+      <p class="font-mono text-[11px] text-dracula-red uppercase tracking-widest mb-4">Guide</p>
+      <h1 class="text-[36px] md:text-[42px] font-bold tracking-[-0.025em] text-ink mb-4">CLI Usage</h1>
+      <p class="text-[16px] text-body leading-[1.7]">The Dracula provides both an interactive TUI and direct command-line modes.</p>
+    </div>
+
+    <!-- Interactive Mode -->
+    <section class="mb-14" data-animate>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-dracula-purple/10 border border-dracula-purple/20 flex items-center justify-center text-dracula-purple text-[14px] font-bold">1</div>
+        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Interactive Mode</h2>
+      </div>
+      <p class="text-[14px] text-body leading-[1.7] mb-4">Run without arguments for a menu-driven experience:</p>
+      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 mb-4 group hover:border-dracula-red/20 transition-all duration-300">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
+        </div>
+        <pre class="text-[14px] font-mono text-ink/80"><code><span class="text-dracula-green">$</span> dracula</code></pre>
+      </div>
+      <p class="text-[14px] text-body leading-[1.7]">If running from source: <code class="bg-canvas-soft-2 border border-hairline/60 px-2 py-0.5 rounded-lg text-[13px] font-mono text-dracula-cyan">python dracula.py</code></p>
+    </section>
+
+    <!-- Download Video -->
+    <section class="mb-14" data-animate>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-dracula-red/10 border border-dracula-red/20 flex items-center justify-center text-dracula-red text-[14px] font-bold">2</div>
+        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Download a Video</h2>
+      </div>
+      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 mb-5 group hover:border-dracula-red/20 transition-all duration-300">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
+        </div>
+        <pre class="text-[14px] font-mono text-ink/80 leading-[1.8]"><code><span class="text-muted"># Best quality (default)</span>
+<span class="text-dracula-green">$</span> dracula video -u "https://youtube.com/watch?v=..."
+
+<span class="text-muted"># Specific quality</span>
+<span class="text-dracula-green">$</span> dracula video -u "URL" -q 1080p
+<span class="text-dracula-green">$</span> dracula video -u "URL" -q 720p
+<span class="text-dracula-green">$</span> dracula video -u "URL" -q 4k
+
+<span class="text-muted"># Custom output directory</span>
+<span class="text-dracula-green">$</span> dracula video -u "URL" -q 1080p -o "C:\Videos"</code></pre>
+      </div>
+      <p class="text-[14px] text-body leading-[1.7] mb-3">Quality options:</p>
+      <div class="flex flex-wrap gap-2">
+        {['best', '4k', '1440p', '1080p', '720p', '480p', '360p', 'worst'].map((q) => (
+          <span class="bg-canvas-soft-2 border border-hairline/60 rounded-lg px-3 py-1.5 text-[13px] font-mono text-body hover:border-dracula-red/30 hover:text-ink transition-all duration-200">{q}</span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Download Audio -->
+    <section class="mb-14" data-animate>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-dracula-pink/10 border border-dracula-pink/20 flex items-center justify-center text-dracula-pink text-[14px] font-bold">3</div>
+        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Download Audio Only</h2>
+      </div>
+      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 mb-5 group hover:border-dracula-red/20 transition-all duration-300">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
+        </div>
+        <pre class="text-[14px] font-mono text-ink/80 leading-[1.8]"><code><span class="text-muted"># Default: MP3 at 192kbps</span>
+<span class="text-dracula-green">$</span> dracula audio -u "URL"
+
+<span class="text-muted"># High quality MP3</span>
+<span class="text-dracula-green">$</span> dracula audio -u "URL" -f mp3 -b 320
+
+<span class="text-muted"># FLAC lossless</span>
+<span class="text-dracula-green">$</span> dracula audio -u "URL" -f flac
+
+<span class="text-muted"># M4A format</span>
+<span class="text-dracula-green">$</span> dracula audio -u "URL" -f m4a -b 256</code></pre>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <p class="text-[14px] text-body leading-[1.7] mb-3">Formats:</p>
+          <div class="flex flex-wrap gap-2">
+            {['mp3', 'm4a', 'wav', 'flac', 'opus', 'aac'].map((f) => (
+              <span class="bg-canvas-soft-2 border border-hairline/60 rounded-lg px-3 py-1.5 text-[13px] font-mono text-body hover:border-dracula-pink/30 hover:text-ink transition-all duration-200">{f}</span>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p class="text-[14px] text-body leading-[1.7] mb-3">Bitrates:</p>
+          <div class="flex flex-wrap gap-2">
+            {['128', '192', '256', '320'].map((b) => (
+              <span class="bg-canvas-soft-2 border border-hairline/60 rounded-lg px-3 py-1.5 text-[13px] font-mono text-body hover:border-dracula-pink/30 hover:text-ink transition-all duration-200">{b}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Playlist -->
+    <section class="mb-14" data-animate>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-dracula-orange/10 border border-dracula-orange/20 flex items-center justify-center text-dracula-orange text-[14px] font-bold">4</div>
+        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Download a Playlist</h2>
+      </div>
+      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 group hover:border-dracula-red/20 transition-all duration-300">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
+        </div>
+        <pre class="text-[14px] font-mono text-ink/80 leading-[1.8]"><code><span class="text-muted"># Full playlist at 720p</span>
+<span class="text-dracula-green">$</span> dracula playlist -u "URL"
+
+<span class="text-muted"># Full playlist at 1080p</span>
+<span class="text-dracula-green">$</span> dracula playlist -u "URL" -q 1080p
+
+<span class="text-muted"># Playlist as audio only (MP3)</span>
+<span class="text-dracula-green">$</span> dracula playlist -u "URL" --audio-only
+
+<span class="text-muted"># Download items 5 through 10</span>
+<span class="text-dracula-green">$</span> dracula playlist -u "URL" --start 5 --end 10</code></pre>
+      </div>
+    </section>
+
+    <!-- List Formats -->
+    <section data-animate>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-dracula-cyan/10 border border-dracula-cyan/20 flex items-center justify-center text-dracula-cyan text-[14px] font-bold">5</div>
+        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">List Available Formats</h2>
+      </div>
+      <p class="text-[14px] text-body leading-[1.7] mb-4">View all available formats before downloading:</p>
+      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 group hover:border-dracula-red/20 transition-all duration-300">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
+        </div>
+        <pre class="text-[14px] font-mono text-ink/80"><code><span class="text-dracula-green">$</span> dracula formats -u "URL"</code></pre>
+      </div>
+    </section>
+  </div>
+</Base>

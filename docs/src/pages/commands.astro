@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+
+const commands = [
+  {
+    name: 'video',
+    description: 'Download a YouTube video',
+    usage: 'dracula video -u URL [options]',
+    numClass: 'bg-dracula-red/10 border-dracula-red/20 text-dracula-red',
+    flags: [
+      { flag: '--url', short: '-u', default: 'required', description: 'YouTube video URL' },
+      { flag: '--quality', short: '-q', default: 'best', description: 'Quality: best/4k/1440p/1080p/720p/480p/360p/worst' },
+      { flag: '--format-id', short: '-f', default: '—', description: 'Specific yt-dlp format ID' },
+      { flag: '--output', short: '-o', default: '~/Downloads/Dracula', description: 'Output directory' },
+    ],
+  },
+  {
+    name: 'audio',
+    description: 'Download audio only',
+    usage: 'dracula audio -u URL [options]',
+    numClass: 'bg-dracula-pink/10 border-dracula-pink/20 text-dracula-pink',
+    flags: [
+      { flag: '--url', short: '-u', default: 'required', description: 'YouTube video URL' },
+      { flag: '--format', short: '-f', default: 'mp3', description: 'Audio format: mp3/m4a/wav/flac/opus/aac' },
+      { flag: '--bitrate', short: '-b', default: '192', description: 'Bitrate in kbps: 128/192/256/320' },
+      { flag: '--output', short: '-o', default: '~/Downloads/Dracula', description: 'Output directory' },
+    ],
+  },
+  {
+    name: 'playlist',
+    description: 'Download a playlist',
+    usage: 'dracula playlist -u URL [options]',
+    numClass: 'bg-dracula-orange/10 border-dracula-orange/20 text-dracula-orange',
+    flags: [
+      { flag: '--url', short: '-u', default: 'required', description: 'Playlist URL' },
+      { flag: '--quality', short: '-q', default: '720p', description: 'Video quality' },
+      { flag: '--audio-only', short: '—', default: 'off', description: 'Download audio only' },
+      { flag: '--format', short: '-f', default: 'mp3', description: 'Audio format (with --audio-only)' },
+      { flag: '--start', short: '—', default: '—', description: 'Start at item number' },
+      { flag: '--end', short: '—', default: '—', description: 'End at item number' },
+      { flag: '--output', short: '-o', default: '~/Downloads/Dracula', description: 'Output directory' },
+    ],
+  },
+  {
+    name: 'formats',
+    description: 'List available formats',
+    usage: 'dracula formats -u URL',
+    numClass: 'bg-dracula-cyan/10 border-dracula-cyan/20 text-dracula-cyan',
+    flags: [
+      { flag: '--url', short: '-u', default: 'required', description: 'YouTube video URL' },
+    ],
+  },
+];
+---
+
+<Base title="Commands Reference" description="Complete command reference for The Dracula CLI.">
+  <div class="max-w-[720px] mx-auto px-6 py-16">
+    <div class="mb-12" data-animate>
+      <p class="font-mono text-[11px] text-dracula-red uppercase tracking-widest mb-4">Reference</p>
+      <h1 class="text-[36px] md:text-[42px] font-bold tracking-[-0.025em] text-ink mb-4">Commands</h1>
+      <p class="text-[16px] text-body leading-[1.7]">Complete reference for all Dracula CLI commands and their options.</p>
+    </div>
+
+    <section class="mb-14" data-animate>
+      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 hover:border-dracula-red/20 transition-all duration-300">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
+          <span class="ml-2 text-[11px] font-mono text-muted">quick reference</span>
+        </div>
+        <pre class="text-[13px] font-mono leading-[2]"><code><span class="text-dracula-cyan">dracula</span>                                 <span class="text-muted"># Interactive menu</span>
+<span class="text-dracula-cyan">dracula video</span>    -u URL                 <span class="text-muted"># Download video</span>
+<span class="text-dracula-cyan">dracula audio</span>    -u URL                 <span class="text-muted"># Download audio only</span>
+<span class="text-dracula-cyan">dracula playlist</span> -u URL                 <span class="text-muted"># Download playlist</span>
+<span class="text-dracula-cyan">dracula formats</span>  -u URL                 <span class="text-muted"># List formats</span></code></pre>
+      </div>
+    </section>
+
+    {commands.map((cmd, i) => (
+      <section class="mb-14" data-animate>
+        <div class="flex items-center gap-3 mb-4">
+          <div class={`w-8 h-8 rounded-lg border flex items-center justify-center text-[14px] font-bold ${cmd.numClass}`}>{i + 1}</div>
+          <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">{cmd.name}</h2>
+        </div>
+        <p class="text-[14px] text-body mb-4">{cmd.description}</p>
+        <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-4 mb-4 group hover:border-dracula-red/20 transition-all duration-300">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
+          </div>
+          <pre class="text-[14px] font-mono text-ink/80"><code><span class="text-dracula-green">$</span> {cmd.usage}</code></pre>
+        </div>
+        <div class="border border-hairline/60 rounded-2xl overflow-hidden">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-canvas-soft-2 border-b border-hairline/60">
+                <th class="px-4 py-3 font-mono text-[11px] text-muted uppercase tracking-widest">Flag</th>
+                <th class="px-4 py-3 font-mono text-[11px] text-muted uppercase tracking-widest">Short</th>
+                <th class="px-4 py-3 font-mono text-[11px] text-muted uppercase tracking-widest">Default</th>
+                <th class="px-4 py-3 font-mono text-[11px] text-muted uppercase tracking-widest">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cmd.flags.map((flag, j) => (
+                <tr class={`border-b border-hairline/40 last:border-b-0 ${j % 2 === 0 ? 'bg-canvas-soft/50' : 'bg-transparent'} hover:bg-dracula-red/[0.03] transition-colors`}>
+                  <td class="px-4 py-3 text-[13px] font-mono text-dracula-cyan">{flag.flag}</td>
+                  <td class="px-4 py-3 text-[13px] font-mono text-body">{flag.short}</td>
+                  <td class="px-4 py-3 text-[13px] font-mono text-muted">{flag.default}</td>
+                  <td class="px-4 py-3 text-[13px] text-body">{flag.description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    ))}
+
+    <section data-animate>
+      <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink mb-4">Output Location</h2>
+      <p class="text-[14px] text-body leading-[1.7] mb-4">By default, files are saved to:</p>
+      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 mb-5 group hover:border-dracula-red/20 transition-all duration-300">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
+        </div>
+        <pre class="text-[14px] font-mono text-ink/80"><code>~/Downloads/Dracula/</code></pre>
+      </div>
+      <p class="text-[14px] text-body leading-[1.7] mb-4">Playlists are saved in a subfolder named after the playlist:</p>
+      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 group hover:border-dracula-red/20 transition-all duration-300">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
+        </div>
+        <pre class="text-[14px] font-mono text-ink/80 leading-[1.8]"><code>~/Downloads/Dracula/&lt;Playlist Title&gt;/01 - Video Title.mp4
+~/Downloads/Dracula/&lt;Playlist Title&gt;/02 - Video Title.mp4</code></pre>
+      </div>
+    </section>
+  </div>
+</Base>

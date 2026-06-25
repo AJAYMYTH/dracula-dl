@@ -1,0 +1,50 @@
+---
+interface Props {
+  code: string;
+  class?: string;
+}
+
+const { code, class: className = '' } = Astro.props;
+---
+
+<button
+  class:list={['copy-btn group/btn inline-flex items-center gap-1.5 rounded-md border border-[#30363d] bg-[#21262d] px-2 py-1 text-[12px] font-mono text-[#8b949e] transition-all duration-150 hover:border-[#ff2d55]/40 hover:text-[#e6edf3]', className]}
+  data-code={code}
+  aria-label="Copy code"
+>
+  <svg class="copy-icon w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+  </svg>
+  <svg class="check-icon hidden w-3.5 h-3.5 text-[#50fa7b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+  </svg>
+  <span class="copy-text">Copy</span>
+  <span class="check-text hidden">Copied!</span>
+</button>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const code = btn.getAttribute('data-code') || '';
+      try {
+        await navigator.clipboard.writeText(code);
+        const copyIcon = btn.querySelector('.copy-icon');
+        const checkIcon = btn.querySelector('.check-icon');
+        const copyText = btn.querySelector('.copy-text');
+        const checkText = btn.querySelector('.check-text');
+        copyIcon?.classList.add('hidden');
+        checkIcon?.classList.remove('hidden');
+        copyText?.classList.add('hidden');
+        checkText?.classList.remove('hidden');
+        setTimeout(() => {
+          copyIcon?.classList.remove('hidden');
+          checkIcon?.classList.add('hidden');
+          copyText?.classList.remove('hidden');
+          checkText?.classList.add('hidden');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+  });
+</script>
