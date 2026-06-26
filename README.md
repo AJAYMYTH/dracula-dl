@@ -251,7 +251,7 @@ python dracula.py formats  -u URL       # List formats
 ## 🔧 Requirements
 
 - Python 3.10+
-- [yt-dlp](https://github.com/AJAYMYTH/dracula-dlp)
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 - [colorama](https://pypi.org/project/colorama/)
 - [FFmpeg](https://ffmpeg.org/) *(required for audio extraction and video merging)*
 
