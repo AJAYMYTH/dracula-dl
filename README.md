@@ -268,4 +268,4 @@ MIT — Free to use, modify, and distribute.
 ---
 
 > Made with ❤️ by [Ajaymyth](https://github.com/AJAYMYTH)  
-> 📧 javaliajayakumar8574@gmail.com
+> 📧 contact.javaliajayakumar@gmail.com
