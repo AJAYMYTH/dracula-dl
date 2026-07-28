@@ -1,11 +1,19 @@
 ---
 interface Props {
   class?: string;
+  featured?: boolean;
 }
 
-const { class: className = '' } = Astro.props;
+const { class: className = '', featured = false } = Astro.props;
 ---
 
-<div class:list={['group relative overflow-hidden rounded-2xl border border-hairline/50 bg-canvas-soft p-6 transition-all duration-500 hover:border-dracula-red/30 hover:shadow-card-hover hover:-translate-y-1', className]}>
+<div class:list={[
+  'group relative overflow-hidden rounded-xl border transition-all duration-300',
+  featured
+    ? 'border-dracula-red/40 bg-canvas-soft-2/90 shadow-[0_0_30px_rgba(255,45,85,0.12)] p-6 md:p-8'
+    : 'border-hairline/60 bg-canvas-soft/80 hover:border-dracula-red/30 hover:bg-canvas-soft-2/60 p-6',
+  className
+]}>
+  <div class="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
   <slot />
 </div>

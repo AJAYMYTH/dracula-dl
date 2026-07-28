@@ -1,149 +1,165 @@
 ---
 import Base from '../layouts/Base.astro';
+import CodeTabs from '../components/CodeTabs.astro';
+import { Terminal, Video, Music, Package, History } from 'lucide-astro';
 ---
 
-<Base title="CLI Usage" description="Learn how to use The Dracula command-line interface.">
-  <div class="max-w-[720px] mx-auto px-6 py-16">
-    <div class="mb-12" data-animate>
-      <p class="font-mono text-[11px] text-dracula-red uppercase tracking-widest mb-4">Guide</p>
-      <h1 class="text-[36px] md:text-[42px] font-bold tracking-[-0.025em] text-ink mb-4">CLI Usage</h1>
-      <p class="text-[16px] text-body leading-[1.7]">The Dracula provides both an interactive TUI and direct command-line modes.</p>
+<Base title="CLI Guide" description="Complete command-line interface guide for The Dracula YouTube Downloader.">
+  <div class="max-w-[800px] mx-auto px-4 sm:px-6 py-12 sm:py-20">
+    <div class="mb-10 sm:mb-14" data-animate>
+      <p class="font-mono text-[11px] sm:text-[12px] text-dracula-red uppercase tracking-wider mb-2 sm:mb-3 flex items-center gap-1.5">
+        <Terminal class="w-3.5 h-3.5" />
+        <span>CLI Documentation</span>
+      </p>
+      <h1 class="text-[30px] sm:text-[42px] md:text-[52px] font-semibold tracking-display-lg text-ink mb-3 sm:mb-4">CLI Usage.</h1>
+      <p class="text-[15px] sm:text-[17px] text-body leading-[1.65]">The Dracula CLI provides direct commands for automated scripts and terminal power-users.</p>
     </div>
 
-    <!-- Interactive Mode -->
-    <section class="mb-14" data-animate>
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-8 h-8 rounded-lg bg-dracula-purple/10 border border-dracula-purple/20 flex items-center justify-center text-dracula-purple text-[14px] font-bold">1</div>
-        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Interactive Mode</h2>
+    <!-- Section 1: Interactive Mode -->
+    <section class="mb-12 sm:mb-16 border-b border-hairline/60 pb-10 sm:pb-12" data-animate>
+      <div class="flex items-center gap-3 mb-3 sm:mb-4">
+        <div class="w-7 h-7 rounded-full bg-canvas-soft-2 border border-hairline/80 flex items-center justify-center text-ink text-[12px] font-mono font-semibold shrink-0">01</div>
+        <h2 class="text-[20px] sm:text-[24px] font-semibold tracking-tight text-ink flex items-center gap-2">
+          <Terminal class="w-4 h-4 sm:w-5 sm:h-5 text-dracula-red shrink-0" />
+          <span>Interactive Mode</span>
+        </h2>
       </div>
-      <p class="text-[14px] text-body leading-[1.7] mb-4">Run without arguments for a menu-driven experience:</p>
-      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 mb-4 group hover:border-dracula-red/20 transition-all duration-300">
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
-        </div>
-        <pre class="text-[14px] font-mono text-ink/80"><code><span class="text-dracula-green">$</span> dracula</code></pre>
-      </div>
-      <p class="text-[14px] text-body leading-[1.7]">If running from source: <code class="bg-canvas-soft-2 border border-hairline/60 px-2 py-0.5 rounded-lg text-[13px] font-mono text-dracula-cyan">python dracula.py</code></p>
+      <p class="text-[13.5px] sm:text-[14px] text-body leading-[1.65] mb-4 sm:mb-5">Launch without arguments to enter the menu-driven prompt interface:</p>
+
+      <CodeTabs
+        blocks={[
+          { label: 'Installed Package', value: 'dracula', lang: 'bash', icon: '$' },
+          { label: 'From Source', value: 'python dracula.py', lang: 'bash', icon: '$' },
+        ]}
+      />
     </section>
 
-    <!-- Download Video -->
-    <section class="mb-14" data-animate>
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-8 h-8 rounded-lg bg-dracula-red/10 border border-dracula-red/20 flex items-center justify-center text-dracula-red text-[14px] font-bold">2</div>
-        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Download a Video</h2>
+    <!-- Section 2: Video Downloads -->
+    <section class="mb-12 sm:mb-16 border-b border-hairline/60 pb-10 sm:pb-12" data-animate>
+      <div class="flex items-center gap-3 mb-3 sm:mb-4">
+        <div class="w-7 h-7 rounded-full bg-canvas-soft-2 border border-hairline/80 flex items-center justify-center text-ink text-[12px] font-mono font-semibold shrink-0">02</div>
+        <h2 class="text-[20px] sm:text-[24px] font-semibold tracking-tight text-ink flex items-center gap-2">
+          <Video class="w-4 h-4 sm:w-5 sm:h-5 text-dracula-cyan shrink-0" />
+          <span>Download Videos</span>
+        </h2>
       </div>
-      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 mb-5 group hover:border-dracula-red/20 transition-all duration-300">
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
-        </div>
-        <pre class="text-[14px] font-mono text-ink/80 leading-[1.8]"><code><span class="text-muted"># Best quality (default)</span>
-<span class="text-dracula-green">$</span> dracula video -u "https://youtube.com/watch?v=..."
+      <p class="text-[13.5px] sm:text-[14px] text-body leading-[1.65] mb-4 sm:mb-5">Download single videos with resolution, subtitle, thumbnail, and speed limit controls:</p>
 
-<span class="text-muted"># Specific quality</span>
-<span class="text-dracula-green">$</span> dracula video -u "URL" -q 1080p
-<span class="text-dracula-green">$</span> dracula video -u "URL" -q 720p
-<span class="text-dracula-green">$</span> dracula video -u "URL" -q 4k
+      <CodeTabs
+        blocks={[
+          {
+            label: 'Examples',
+            value: `# Default 720p download
+dracula video -u "https://youtube.com/watch?v=..."
 
-<span class="text-muted"># Custom output directory</span>
-<span class="text-dracula-green">$</span> dracula video -u "URL" -q 1080p -o "C:\Videos"</code></pre>
-      </div>
-      <p class="text-[14px] text-body leading-[1.7] mb-3">Quality options:</p>
-      <div class="flex flex-wrap gap-2">
+# Specific quality with subtitle embedding & cover art
+dracula video -u "URL" -q 1080p --subs en --embed-subs --embed-thumbnail
+
+# 4K download with speed limit & dry-run simulation
+dracula video -u "URL" -q 4k --limit-rate 2M --dry-run`,
+            lang: 'bash',
+            icon: '$',
+          },
+        ]}
+        class="mb-6"
+      />
+
+      <p class="text-[12px] sm:text-[13px] font-mono text-muted uppercase tracking-wider mb-3">Available Video Qualities</p>
+      <div class="flex flex-wrap gap-1.5 sm:gap-2">
         {['best', '4k', '1440p', '1080p', '720p', '480p', '360p', 'worst'].map((q) => (
-          <span class="bg-canvas-soft-2 border border-hairline/60 rounded-lg px-3 py-1.5 text-[13px] font-mono text-body hover:border-dracula-red/30 hover:text-ink transition-all duration-200">{q}</span>
+          <span class="bg-canvas-soft-2 border border-hairline/80 rounded-md px-2.5 sm:px-3 py-1 text-[11px] sm:text-[12px] font-mono text-ink">{q}</span>
         ))}
       </div>
     </section>
 
-    <!-- Download Audio -->
-    <section class="mb-14" data-animate>
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-8 h-8 rounded-lg bg-dracula-pink/10 border border-dracula-pink/20 flex items-center justify-center text-dracula-pink text-[14px] font-bold">3</div>
-        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Download Audio Only</h2>
+    <!-- Section 3: Audio Extraction -->
+    <section class="mb-12 sm:mb-16 border-b border-hairline/60 pb-10 sm:pb-12" data-animate>
+      <div class="flex items-center gap-3 mb-3 sm:mb-4">
+        <div class="w-7 h-7 rounded-full bg-canvas-soft-2 border border-hairline/80 flex items-center justify-center text-ink text-[12px] font-mono font-semibold shrink-0">03</div>
+        <h2 class="text-[20px] sm:text-[24px] font-semibold tracking-tight text-ink flex items-center gap-2">
+          <Music class="w-4 h-4 sm:w-5 sm:h-5 text-dracula-purple shrink-0" />
+          <span>Download Audio Only</span>
+        </h2>
       </div>
-      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 mb-5 group hover:border-dracula-red/20 transition-all duration-300">
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
-        </div>
-        <pre class="text-[14px] font-mono text-ink/80 leading-[1.8]"><code><span class="text-muted"># Default: MP3 at 192kbps</span>
-<span class="text-dracula-green">$</span> dracula audio -u "URL"
+      <p class="text-[13.5px] sm:text-[14px] text-body leading-[1.65] mb-4 sm:mb-5">Extract audio tracks in high quality formats with embedded cover art:</p>
 
-<span class="text-muted"># High quality MP3</span>
-<span class="text-dracula-green">$</span> dracula audio -u "URL" -f mp3 -b 320
+      <CodeTabs
+        blocks={[
+          {
+            label: 'Examples',
+            value: `# Default MP3 at 192kbps
+dracula audio -u "URL"
 
-<span class="text-muted"># FLAC lossless</span>
-<span class="text-dracula-green">$</span> dracula audio -u "URL" -f flac
+# High quality 320kbps MP3 with album art
+dracula audio -u "URL" -f mp3 -b 320 --embed-thumbnail
 
-<span class="text-muted"># M4A format</span>
-<span class="text-dracula-green">$</span> dracula audio -u "URL" -f m4a -b 256</code></pre>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <p class="text-[14px] text-body leading-[1.7] mb-3">Formats:</p>
-          <div class="flex flex-wrap gap-2">
-            {['mp3', 'm4a', 'wav', 'flac', 'opus', 'aac'].map((f) => (
-              <span class="bg-canvas-soft-2 border border-hairline/60 rounded-lg px-3 py-1.5 text-[13px] font-mono text-body hover:border-dracula-pink/30 hover:text-ink transition-all duration-200">{f}</span>
-            ))}
-          </div>
-        </div>
-        <div>
-          <p class="text-[14px] text-body leading-[1.7] mb-3">Bitrates:</p>
-          <div class="flex flex-wrap gap-2">
-            {['128', '192', '256', '320'].map((b) => (
-              <span class="bg-canvas-soft-2 border border-hairline/60 rounded-lg px-3 py-1.5 text-[13px] font-mono text-body hover:border-dracula-pink/30 hover:text-ink transition-all duration-200">{b}</span>
-            ))}
-          </div>
-        </div>
-      </div>
+# Lossless FLAC extraction
+dracula audio -u "URL" -f flac`,
+            lang: 'bash',
+            icon: '$',
+          },
+        ]}
+      />
     </section>
 
-    <!-- Download Playlist -->
-    <section class="mb-14" data-animate>
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-8 h-8 rounded-lg bg-dracula-orange/10 border border-dracula-orange/20 flex items-center justify-center text-dracula-orange text-[14px] font-bold">4</div>
-        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">Download a Playlist</h2>
+    <!-- Section 4: Batch Downloads -->
+    <section class="mb-12 sm:mb-16 border-b border-hairline/60 pb-10 sm:pb-12" data-animate>
+      <div class="flex items-center gap-3 mb-3 sm:mb-4">
+        <div class="w-7 h-7 rounded-full bg-canvas-soft-2 border border-hairline/80 flex items-center justify-center text-ink text-[12px] font-mono font-semibold shrink-0">04</div>
+        <h2 class="text-[20px] sm:text-[24px] font-semibold tracking-tight text-ink flex items-center gap-2">
+          <Package class="w-4 h-4 sm:w-5 sm:h-5 text-dracula-orange shrink-0" />
+          <span>Batch Download URLs</span>
+        </h2>
       </div>
-      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 group hover:border-dracula-red/20 transition-all duration-300">
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
-        </div>
-        <pre class="text-[14px] font-mono text-ink/80 leading-[1.8]"><code><span class="text-muted"># Full playlist at 720p</span>
-<span class="text-dracula-green">$</span> dracula playlist -u "URL"
+      <p class="text-[13.5px] sm:text-[14px] text-body leading-[1.65] mb-4 sm:mb-5">Process dozens of URLs sequentially from text files or multiple URL flags:</p>
 
-<span class="text-muted"># Full playlist at 1080p</span>
-<span class="text-dracula-green">$</span> dracula playlist -u "URL" -q 1080p
+      <CodeTabs
+        blocks={[
+          {
+            label: 'Batch Examples',
+            value: `# Batch video download from text file (urls.txt)
+dracula batch -i urls.txt -q 1080p
 
-<span class="text-muted"># Playlist as audio only (MP3)</span>
-<span class="text-dracula-green">$</span> dracula playlist -u "URL" --audio-only
+# Batch download multiple URLs directly via flags
+dracula batch -u "https://..." -u "https://..." -q 720p
 
-<span class="text-muted"># Download items 5 through 10</span>
-<span class="text-dracula-green">$</span> dracula playlist -u "URL" --start 5 --end 10</code></pre>
-      </div>
+# Batch audio extraction from file
+dracula batch -i urls.txt --audio-only -f mp3 -b 320`,
+            lang: 'bash',
+            icon: '$',
+          },
+        ]}
+      />
     </section>
 
-    <!-- List Formats -->
+    <!-- Section 5: History & Completion -->
     <section data-animate>
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-8 h-8 rounded-lg bg-dracula-cyan/10 border border-dracula-cyan/20 flex items-center justify-center text-dracula-cyan text-[14px] font-bold">5</div>
-        <h2 class="text-[22px] font-semibold tracking-[-0.015em] text-ink">List Available Formats</h2>
+      <div class="flex items-center gap-3 mb-3 sm:mb-4">
+        <div class="w-7 h-7 rounded-full bg-canvas-soft-2 border border-hairline/80 flex items-center justify-center text-ink text-[12px] font-mono font-semibold shrink-0">05</div>
+        <h2 class="text-[20px] sm:text-[24px] font-semibold tracking-tight text-ink flex items-center gap-2">
+          <History class="w-4 h-4 sm:w-5 sm:h-5 text-dracula-green shrink-0" />
+          <span>History & Shell Completion</span>
+        </h2>
       </div>
-      <p class="text-[14px] text-body leading-[1.7] mb-4">View all available formats before downloading:</p>
-      <div class="bg-canvas-soft-2 border border-hairline/60 rounded-2xl p-5 group hover:border-dracula-red/20 transition-all duration-300">
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
-        </div>
-        <pre class="text-[14px] font-mono text-ink/80"><code><span class="text-dracula-green">$</span> dracula formats -u "URL"</code></pre>
-      </div>
+      <p class="text-[13.5px] sm:text-[14px] text-body leading-[1.65] mb-4 sm:mb-5">Access download history logs and configure shell auto-completion:</p>
+
+      <CodeTabs
+        blocks={[
+          {
+            label: 'Commands',
+            value: `# Show 50 recent download records
+dracula history -n 50
+
+# Display shell auto-completion setup guide
+dracula completion
+
+# Re-attempt failed items from previous playlist run
+dracula playlist -u "URL" --retry-failed`,
+            lang: 'bash',
+            icon: '$',
+          },
+        ]}
+      />
     </section>
   </div>
 </Base>

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { Terminal, Heart, Github, Package, Menu, X, ArrowUpRight, Download, Sliders, Command, Clock, Sparkles } from 'lucide-astro';
 
 interface Props {
   title: string;
@@ -7,100 +8,195 @@ interface Props {
 }
 
 const { title, description = 'The Dracula — A powerful YouTube downloader CLI + TUI powered by yt-dlp' } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { label: 'Installation', href: '/installation', icon: Download, desc: 'Setup guide & package installation' },
+  { label: 'CLI Guide', href: '/cli', icon: Terminal, desc: 'Command line options & flags' },
+  { label: 'TUI Interface', href: '/tui', icon: Sliders, desc: 'Interactive terminal workflow' },
+  { label: 'Commands Reference', href: '/commands', icon: Command, desc: 'API & flag specifications' },
+  { label: 'Release Changelog', href: '/changelog', icon: Clock, desc: 'Version history & updates' },
+];
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <meta name="description" content={description} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <title>{title} — Dracula</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <title>{title} — The Dracula</title>
 </head>
-<body class="bg-canvas text-ink font-sans antialiased min-h-screen">
-  <nav class="sticky top-0 z-50 bg-canvas/70 backdrop-blur-2xl border-b border-hairline/50 h-16 flex items-center transition-all duration-300">
-    <div class="max-w-[1400px] w-full mx-auto px-6 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2.5 text-ink no-underline group">
-        <span class="text-xl transition-transform duration-300 group-hover:scale-110">🧛</span>
-        <span class="font-bold text-[15px] tracking-tight">Dracula</span>
-        <span class="text-[10px] font-mono text-dracula-red bg-dracula-red-soft px-1.5 py-0.5 rounded-full border border-dracula-red/20">v1.0.4</span>
+<body class="bg-canvas text-ink font-sans antialiased min-h-screen flex flex-col selection:bg-dracula-red selection:text-white">
+  <!-- Navbar Header -->
+  <header class="sticky top-0 z-50 bg-[#09090b]/90 backdrop-blur-xl border-b border-[#27272a] h-16 transition-all duration-300">
+    <div class="max-w-[1400px] h-full mx-auto px-4 sm:px-6 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="/" class="flex items-center gap-2 sm:gap-2.5 text-ink no-underline group shrink-0">
+        <div class="w-8 h-8 rounded-lg bg-[#18181b] border border-[#27272a] flex items-center justify-center text-dracula-red group-hover:border-dracula-red/50 transition-colors">
+          <Terminal class="w-4 h-4" />
+        </div>
+        <span class="font-semibold text-[15px] tracking-tight dracula-logo-shimmer">Dracula</span>
+        <span class="text-[11px] font-mono text-dracula-red bg-dracula-red-soft px-2 py-0.5 rounded-full border border-dracula-red/30 shrink-0">v1.1.2</span>
       </a>
-      <div class="hidden md:flex items-center gap-1">
-        <a href="/installation" class="px-3 py-1.5 text-[13px] font-medium text-body hover:text-ink hover:bg-canvas-soft-2 rounded-lg transition-all duration-200 no-underline">Installation</a>
-        <a href="/cli" class="px-3 py-1.5 text-[13px] font-medium text-body hover:text-ink hover:bg-canvas-soft-2 rounded-lg transition-all duration-200 no-underline">CLI</a>
-        <a href="/tui" class="px-3 py-1.5 text-[13px] font-medium text-body hover:text-ink hover:bg-canvas-soft-2 rounded-lg transition-all duration-200 no-underline">TUI</a>
-        <a href="/commands" class="px-3 py-1.5 text-[13px] font-medium text-body hover:text-ink hover:bg-canvas-soft-2 rounded-lg transition-all duration-200 no-underline">Commands</a>
-      </div>
-      <div class="flex items-center gap-3">
-        <a href="https://github.com/AJAYMYTH/dracula-dl" target="_blank" rel="noopener" class="text-body hover:text-ink transition-all duration-200 hover:scale-110">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center gap-1">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'px-3.5 py-1.5 text-[13px] font-medium rounded-full transition-all duration-200 no-underline',
+              currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
+                ? 'bg-[#18181b] text-white border border-[#27272a]'
+                : 'text-zinc-400 hover:text-white hover:bg-[#18181b]/60'
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Action CTAs & Mobile Toggle Button -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="https://github.com/AJAYMYTH/dracula-dl" target="_blank" rel="noopener" class="text-zinc-400 hover:text-white transition-colors p-2 rounded-full hover:bg-[#18181b] shrink-0" aria-label="GitHub">
+          <Github class="w-4 h-4" />
         </a>
-        <a href="https://pypi.org/project/dracula-dl/" target="_blank" rel="noopener" class="bg-dracula-red text-white text-[13px] font-semibold px-4 py-1.5 rounded-lg hover:bg-dracula-red-deep transition-all duration-200 hover:shadow-[0_0_20px_rgba(255,45,85,0.3)] no-underline">PyPI</a>
-        <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center w-8 h-8 text-body hover:text-ink transition-colors" aria-label="Toggle menu">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <a href="https://pypi.org/project/dracula-dl/" target="_blank" rel="noopener" class="bg-white text-black hover:bg-zinc-200 text-[12px] sm:text-[13px] font-semibold px-3.5 sm:px-4 py-1.5 rounded-full transition-all duration-200 no-underline shadow-sm flex items-center gap-1.5 shrink-0">
+          <Package class="w-3.5 h-3.5 hidden xs:inline-block" />
+          <span>pip install</span>
+        </a>
+        <button id="mobile-menu-btn" class="lg:hidden flex items-center justify-center w-9 h-9 text-zinc-300 hover:text-white transition-colors rounded-lg border border-[#27272a] bg-[#18181b] shrink-0" aria-label="Toggle menu">
+          <Menu id="icon-menu" class="w-5 h-5" />
+          <X id="icon-close" class="w-5 h-5 hidden" />
         </button>
       </div>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden absolute top-16 left-0 right-0 bg-canvas-soft/95 backdrop-blur-xl border-b border-hairline/50 px-6 py-4 space-y-1">
-      <a href="/installation" class="block px-4 py-2.5 text-[14px] font-medium text-body hover:text-ink hover:bg-canvas-soft-2 rounded-lg transition-all no-underline">Installation</a>
-      <a href="/cli" class="block px-4 py-2.5 text-[14px] font-medium text-body hover:text-ink hover:bg-canvas-soft-2 rounded-lg transition-all no-underline">CLI</a>
-      <a href="/tui" class="block px-4 py-2.5 text-[14px] font-medium text-body hover:text-ink hover:bg-canvas-soft-2 rounded-lg transition-all no-underline">TUI</a>
-      <a href="/commands" class="block px-4 py-2.5 text-[14px] font-medium text-body hover:text-ink hover:bg-canvas-soft-2 rounded-lg transition-all no-underline">Commands</a>
-    </div>
-  </nav>
+  </header>
 
-  <main>
+  <!-- Mobile Drawer Menu (Outside Header for Perfect Positioning) -->
+  <div id="mobile-menu" class="hidden lg:hidden fixed inset-x-0 top-16 bottom-0 bg-[#09090b]/98 backdrop-blur-2xl border-b border-[#27272a] p-4 sm:p-6 z-50 overflow-y-auto animate-fade-in-down">
+    <div class="max-w-[500px] mx-auto space-y-3">
+      <p class="font-mono text-[11px] text-muted uppercase tracking-wider px-1 mb-2">Navigation Menu</p>
+
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'flex items-center gap-3.5 p-3.5 rounded-xl transition-all no-underline border',
+            currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
+              ? 'bg-[#18181b] text-white border-dracula-red/40 shadow-sm'
+              : 'bg-[#121215] text-zinc-300 hover:text-white hover:bg-[#18181b] border-[#27272a]'
+          ]}
+        >
+          <div class="w-9 h-9 rounded-lg bg-[#18181b] border border-[#27272a] flex items-center justify-center text-dracula-red shrink-0">
+            <item.icon class="w-4.5 h-4.5" />
+          </div>
+          <div>
+            <p class="text-[14.5px] font-semibold text-white leading-tight mb-0.5">{item.label}</p>
+            <p class="text-[12px] text-zinc-400">{item.desc}</p>
+          </div>
+        </a>
+      ))}
+
+      <div class="pt-4 border-t border-[#27272a] space-y-2.5">
+        <a href="https://pypi.org/project/dracula-dl/" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-3 bg-dracula-red text-white font-semibold rounded-xl text-[14px] no-underline shadow-lg">
+          <Package class="w-4 h-4" />
+          <span>pip install dracula-dl (v1.1.2)</span>
+        </a>
+        <a href="https://github.com/AJAYMYTH/dracula-dl" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-3 bg-[#18181b] border border-[#27272a] text-zinc-200 rounded-xl text-[14px] font-medium no-underline hover:text-white">
+          <Github class="w-4 h-4" />
+          <span>Star on GitHub</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="flex-grow">
     <slot />
   </main>
 
-  <footer class="bg-canvas-soft border-t border-hairline/50 mt-32">
-    <div class="max-w-[1400px] mx-auto px-6 py-16">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+  <!-- Footer -->
+  <footer class="bg-[#09090b] border-t border-[#27272a] mt-20 sm:mt-32">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
         <div>
-          <h4 class="font-mono text-[11px] font-medium text-dracula-red uppercase tracking-widest mb-4">Product</h4>
+          <h4 class="font-mono text-[11px] font-medium text-muted uppercase tracking-wider mb-4">Product</h4>
           <ul class="space-y-2.5">
-            <li><a href="/installation" class="text-[13px] text-body hover:text-ink transition-colors no-underline">Installation</a></li>
-            <li><a href="/cli" class="text-[13px] text-body hover:text-ink transition-colors no-underline">CLI Guide</a></li>
-            <li><a href="/tui" class="text-[13px] text-body hover:text-ink transition-colors no-underline">TUI Guide</a></li>
-            <li><a href="/commands" class="text-[13px] text-body hover:text-ink transition-colors no-underline">Commands</a></li>
+            <li><a href="/installation" class="text-[13px] text-zinc-400 hover:text-white transition-colors no-underline">Installation</a></li>
+            <li><a href="/cli" class="text-[13px] text-zinc-400 hover:text-white transition-colors no-underline">CLI Guide</a></li>
+            <li><a href="/tui" class="text-[13px] text-zinc-400 hover:text-white transition-colors no-underline">TUI Guide</a></li>
+            <li><a href="/commands" class="text-[13px] text-zinc-400 hover:text-white transition-colors no-underline">Commands Reference</a></li>
+            <li><a href="/changelog" class="text-[13px] text-zinc-400 hover:text-white transition-colors no-underline">Release Changelog</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-mono text-[11px] font-medium text-dracula-red uppercase tracking-widest mb-4">Resources</h4>
+          <h4 class="font-mono text-[11px] font-medium text-muted uppercase tracking-wider mb-4">Resources</h4>
           <ul class="space-y-2.5">
-            <li><a href="https://github.com/AJAYMYTH/dracula-dl" target="_blank" rel="noopener" class="text-[13px] text-body hover:text-ink transition-colors no-underline">GitHub</a></li>
-            <li><a href="https://pypi.org/project/dracula-dl/" target="_blank" rel="noopener" class="text-[13px] text-body hover:text-ink transition-colors no-underline">PyPI</a></li>
-            <li><a href="https://github.com/AJAYMYTH/dracula-dl/issues" target="_blank" rel="noopener" class="text-[13px] text-body hover:text-ink transition-colors no-underline">Issues</a></li>
+            <li><a href="https://github.com/AJAYMYTH/dracula-dl" target="_blank" rel="noopener" class="text-[13px] text-zinc-400 hover:text-white transition-colors no-underline inline-flex items-center gap-1">GitHub Repository <ArrowUpRight class="w-3 h-3 text-muted" /></a></li>
+            <li><a href="https://pypi.org/project/dracula-dl/" target="_blank" rel="noopener" class="text-[13px] text-zinc-400 hover:text-white transition-colors no-underline inline-flex items-center gap-1">PyPI Package <ArrowUpRight class="w-3 h-3 text-muted" /></a></li>
+            <li><a href="https://github.com/AJAYMYTH/dracula-dl/issues" target="_blank" rel="noopener" class="text-[13px] text-zinc-400 hover:text-white transition-colors no-underline inline-flex items-center gap-1">Issue Tracker <ArrowUpRight class="w-3 h-3 text-muted" /></a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-mono text-[11px] font-medium text-dracula-red uppercase tracking-widest mb-4">Community</h4>
+          <h4 class="font-mono text-[11px] font-medium text-muted uppercase tracking-wider mb-4">Community</h4>
           <ul class="space-y-2.5">
-            <li><a href="https://github.com/AJAYMYTH/dracula-dl" target="_blank" rel="noopener" class="text-[13px] text-body hover:text-ink transition-colors no-underline">Contribute</a></li>
-            <li><a href="https://github.com/AJAYMYTH/dracula-dl/issues" target="_blank" rel="noopener" class="text-[13px] text-body hover:text-ink transition-colors no-underline">Report Bug</a></li>
+            <li><a href="https://github.com/AJAYMYTH/dracula-dl" target="_blank" rel="noopener" class="text-[13px] text-zinc-400 hover:text-white transition-colors no-underline">Contribute</a></li>
+            <li><a href="https://github.com/AJAYMYTH/dracula-dl/issues" target="_blank" rel="noopener" class="text-[13px] text-zinc-400 hover:text-white transition-colors no-underline">Report Bug</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-mono text-[11px] font-medium text-dracula-red uppercase tracking-widest mb-4">Legal</h4>
+          <h4 class="font-mono text-[11px] font-medium text-muted uppercase tracking-wider mb-4">Legal</h4>
           <ul class="space-y-2.5">
-            <li><a href="https://github.com/AJAYMYTH/dracula-dl/blob/main/LICENSE" target="_blank" rel="noopener" class="text-[13px] text-body hover:text-ink transition-colors no-underline">MIT License</a></li>
+            <li><a href="https://github.com/AJAYMYTH/dracula-dl/blob/main/LICENSE" target="_blank" rel="noopener" class="text-[13px] text-zinc-400 hover:text-white transition-colors no-underline">MIT License</a></li>
           </ul>
         </div>
       </div>
-      <div class="mt-12 pt-8 border-t border-hairline/50 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-[13px] text-muted">Made with <span class="text-dracula-red">❤</span> by <a href="https://github.com/AJAYMYTH" target="_blank" rel="noopener" class="text-body hover:text-ink transition-colors no-underline">Ajaymyth</a></p>
-        <p class="text-[12px] text-muted font-mono">dracula-dl v1.0.4</p>
+      <div class="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-[#27272a] flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-[13px] text-muted flex items-center gap-1.5">
+          <span>Created with</span>
+          <Heart class="w-3.5 h-3.5 text-dracula-red fill-dracula-red inline" />
+          <span>by</span>
+          <a href="https://github.com/AJAYMYTH" target="_blank" rel="noopener" class="text-zinc-300 hover:text-white transition-colors no-underline font-medium">Ajaymyth</a>
+        </p>
+        <p class="text-[12px] text-muted font-mono">dracula-dl v1.1.2</p>
       </div>
     </div>
   </footer>
+
   <script>
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
-    btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+    const iconMenu = document.getElementById('icon-menu');
+    const iconClose = document.getElementById('icon-close');
+
+    btn?.addEventListener('click', () => {
+      const isHidden = menu?.classList.contains('hidden');
+      if (isHidden) {
+        menu?.classList.remove('hidden');
+        iconMenu?.classList.add('hidden');
+        iconClose?.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        menu?.classList.add('hidden');
+        iconMenu?.classList.remove('hidden');
+        iconClose?.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    });
+
+    menu?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        menu?.classList.add('hidden');
+        iconMenu?.classList.remove('hidden');
+        iconClose?.classList.add('hidden');
+        document.body.style.overflow = '';
+      });
+    });
 
     const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {

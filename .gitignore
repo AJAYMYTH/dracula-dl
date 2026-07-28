@@ -20,6 +20,11 @@ ENV/
 .vscode/
 .DS_Store
 
+# Design specifications & Drafts
+DESIGN.md
+docs/DESIGN.md
+draft/
+
 # Media files & Downloader leftovers
 *.mp4
 *.mp3

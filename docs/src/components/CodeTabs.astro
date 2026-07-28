@@ -23,42 +23,41 @@ const highlighted = await Promise.all(
 );
 ---
 
-<div class:list={['code-tabs rounded-2xl border border-hairline/60 overflow-hidden', className]}>
-  <div class="code-tabs-list flex items-center border-b border-hairline/60 bg-canvas-soft">
-    {blocks.map((block) => (
-      <button
-        class:list={[
-          'code-tab-trigger flex items-center gap-1.5 px-4 py-2.5 text-[13px] font-medium transition-all duration-150 border-b-2 -mb-px',
-          block.value === activeTab
-            ? 'text-ink border-dracula-red bg-canvas-soft-2'
-            : 'text-body hover:text-ink border-transparent hover:bg-canvas-soft-2/50',
-        ]}
-        data-tab={block.value}
-      >
-        {block.icon && <span class="text-[11px] text-muted">{block.icon}</span>}
-        <span>{block.label}</span>
-      </button>
-    ))}
-    <div class="ml-auto pr-3">
-      <CopyButton code={blocks.find(b => b.value === activeTab)?.value || ''} class="code-copy-btn" />
+<div class:list={['code-tabs rounded-xl border border-[#27272a] overflow-hidden bg-[#09090b] shadow-2xl my-4', className]}>
+  <div class="code-tabs-list flex items-center border-b border-[#27272a] bg-[#121215] px-3 py-1">
+    <div class="flex items-center gap-1.5 mr-3 px-1">
+      <div class="w-2.5 h-2.5 rounded-full bg-[#3f3f46]"></div>
+      <div class="w-2.5 h-2.5 rounded-full bg-[#3f3f46]"></div>
+      <div class="w-2.5 h-2.5 rounded-full bg-[#3f3f46]"></div>
+    </div>
+    <div class="flex items-center gap-1 overflow-x-auto py-1">
+      {blocks.map((block) => (
+        <button
+          class:list={[
+            'code-tab-trigger flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-mono transition-all duration-150 rounded-md shrink-0',
+            block.value === activeTab
+              ? 'text-white bg-[#1c1c21] font-semibold border border-[#3f3f46]'
+              : 'text-zinc-400 hover:text-white hover:bg-[#18181b]',
+          ]}
+          data-tab={block.value}
+        >
+          {block.icon && <span class="text-[11px] text-dracula-cyan font-bold">{block.icon}</span>}
+          <span>{block.label}</span>
+        </button>
+      ))}
+    </div>
+    <div class="ml-auto pl-2">
+      <CopyButton code={blocks.find(b => b.value === activeTab)?.value || ''} class="code-copy-btn text-zinc-300 hover:text-white" />
     </div>
   </div>
 
-  <div class="code-tabs-panels bg-canvas-soft-2">
+  <div class="code-tabs-panels bg-[#09090b]">
     {blocks.map((block, i) => (
       <div
-        class:list={['code-tab-panel', block.value === activeTab ? '' : 'hidden']}
+        class:list={['code-tab-panel p-4 sm:p-5 overflow-x-auto font-mono text-[13.5px] leading-relaxed text-white', block.value === activeTab ? '' : 'hidden']}
         data-panel={block.value}
       >
-        <div class="code-panel-content">
-          <div class="flex items-center gap-2 mb-3 px-5 pt-4">
-            <div class="w-2.5 h-2.5 rounded-full bg-dracula-red/60"></div>
-            <div class="w-2.5 h-2.5 rounded-full bg-dracula-orange/60"></div>
-            <div class="w-2.5 h-2.5 rounded-full bg-dracula-green/60"></div>
-            <span class="ml-1 text-[11px] font-mono text-muted">{block.label}</span>
-          </div>
-          <div class="code-block" set:html={highlighted[i]} />
-        </div>
+        <div class="code-block text-white" set:html={highlighted[i]} />
       </div>
     ))}
   </div>
@@ -68,92 +67,29 @@ const highlighted = await Promise.all(
   document.querySelectorAll('.code-tabs').forEach((container) => {
     const triggers = container.querySelectorAll('.code-tab-trigger');
     const panels = container.querySelectorAll('.code-tab-panel');
-    const copyBtn = container.querySelector('.code-copy-btn') as HTMLElement;
-
-    function activateTab(value: string) {
-      triggers.forEach((trigger) => {
-        const tabValue = trigger.getAttribute('data-tab');
-        if (tabValue === value) {
-          trigger.classList.add('text-ink', 'border-dracula-red', 'bg-canvas-soft-2');
-          trigger.classList.remove('text-body', 'border-transparent');
-        } else {
-          trigger.classList.remove('text-ink', 'border-dracula-red', 'bg-canvas-soft-2');
-          trigger.classList.add('text-body', 'border-transparent');
-        }
-      });
-
-      panels.forEach((panel) => {
-        const panelValue = panel.getAttribute('data-panel');
-        if (panelValue === value) {
-          panel.classList.remove('hidden');
-        } else {
-          panel.classList.add('hidden');
-        }
-      });
-
-      if (copyBtn) {
-        copyBtn.setAttribute('data-code', value);
-      }
-    }
 
     triggers.forEach((trigger) => {
       trigger.addEventListener('click', () => {
-        const value = trigger.getAttribute('data-tab');
-        if (value) activateTab(value);
+        const targetValue = trigger.getAttribute('data-tab');
+
+        triggers.forEach((t) => {
+          if (t.getAttribute('data-tab') === targetValue) {
+            t.classList.add('text-white', 'bg-[#1c1c21]', 'font-semibold', 'border', 'border-[#3f3f46]');
+            t.classList.remove('text-zinc-400', 'hover:bg-[#18181b]');
+          } else {
+            t.classList.remove('text-white', 'bg-[#1c1c21]', 'font-semibold', 'border', 'border-[#3f3f46]');
+            t.classList.add('text-zinc-400', 'hover:bg-[#18181b]');
+          }
+        });
+
+        panels.forEach((p) => {
+          if (p.getAttribute('data-panel') === targetValue) {
+            p.classList.remove('hidden');
+          } else {
+            p.classList.add('hidden');
+          }
+        });
       });
     });
   });
 </script>
-
-<style is:global>
-  .code-tabs .code-panel-content {
-    background: #0d1117;
-  }
-
-  .code-tabs .code-block {
-    background: #0d1117;
-    padding: 0 20px 20px 20px;
-  }
-
-  .code-tabs .code-block pre {
-    background: transparent !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    border-radius: 0 !important;
-    overflow-x: auto;
-    color: #e6edf3 !important;
-  }
-
-  .code-tabs .code-block pre code {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace !important;
-    font-size: 13px !important;
-    line-height: 1.7 !important;
-    background: transparent !important;
-    color: #e6edf3 !important;
-  }
-
-  .code-tabs .code-block pre code span {
-    color: #e6edf3 !important;
-  }
-
-  .code-tabs .code-block pre code .keyword {
-    color: #ff7b72 !important;
-  }
-
-  .code-tabs .code-block pre code .string {
-    color: #a5d6ff !important;
-  }
-
-  .code-tabs .code-block pre code .comment {
-    color: #8b949e !important;
-  }
-
-  .code-tabs .code-block pre code .function {
-    color: #d2a8ff !important;
-  }
-
-  .code-tabs .code-block pre code .variable {
-    color: #ffa657 !important;
-  }
-</style>

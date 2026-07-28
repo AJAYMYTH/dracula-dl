@@ -1,0 +1,104 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0', className]}>
+  <canvas id="hero-code-rain" class="w-full h-full opacity-25 block"></canvas>
+</div>
+
+<script>
+  function initCodeRain() {
+    const canvas = document.getElementById('hero-code-rain') as HTMLCanvasElement | null;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId: number;
+
+    const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=[]{}|;:,.<>?/';
+    const charArray = chars.split('');
+
+    const fontSize = 14;
+    let columns = 0;
+    let drops: number[] = [];
+    let speeds: number[] = [];
+
+    function resizeCanvas() {
+      if (!canvas || !ctx) return;
+      const rect = canvas.parentElement?.getBoundingClientRect();
+      const width = rect?.width || window.innerWidth;
+      const height = rect?.height || window.innerHeight;
+
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+
+      columns = Math.floor(width / fontSize);
+      drops = [];
+      speeds = [];
+
+      for (let i = 0; i < columns; i++) {
+        drops[i] = Math.floor(Math.random() * -50);
+        speeds[i] = 0.5 + Math.random() * 1.2;
+      }
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function draw() {
+      if (!canvas || !ctx) return;
+      const width = canvas.width / (window.devicePixelRatio || 1);
+      const height = canvas.height / (window.devicePixelRatio || 1);
+
+      // Trailing fade effect
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.font = `${fontSize}px "JetBrains Mono", "Geist Mono", monospace`;
+
+      for (let i = 0; i < columns; i++) {
+        const text = charArray[Math.floor(Math.random() * charArray.length)];
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        // Leading head character glows bright red/white, tail fades to dracula red/purple
+        if (Math.random() > 0.92) {
+          ctx.fillStyle = '#ffffff';
+        } else if (Math.random() > 0.7) {
+          ctx.fillStyle = '#ff2d55';
+        } else {
+          ctx.fillStyle = 'rgba(189, 147, 249, 0.6)';
+        }
+
+        ctx.fillText(text, x, y);
+
+        if (y > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i] += speeds[i];
+      }
+
+      animationFrameId = requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded', initCodeRain);
+  if (document.readyState === 'interactive' || document.readyState === 'complete') {
+    initCodeRain();
+  }
+</script>

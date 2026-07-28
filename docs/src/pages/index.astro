@@ -1,135 +1,159 @@
 ---
 import Base from '../layouts/Base.astro';
 import SpotlightCard from '../components/SpotlightCard.astro';
-import NebulaFlow from '../components/NebulaFlow.astro';
+import CodeRain from '../components/CodeRain.astro';
+import { Video, Music, ListOrdered, Package, Settings, Terminal, ArrowRight, Sparkles, CheckCircle2 } from 'lucide-astro';
 ---
 
-<Base title="Home">
-  <!-- Hero -->
-  <section class="relative overflow-hidden pt-24 pb-20 px-6 min-h-[600px] flex items-center">
-    <NebulaFlow
-      colors={['#1a0a2e', '#2d1b4e', '#ff2d55']}
-      speed={0.8}
-      scale={1.2}
-      density={0.6}
-      interactive={true}
-      class="opacity-60"
-    />
-    <div class="absolute inset-0 bg-gradient-to-b from-canvas/30 via-transparent to-canvas pointer-events-none"></div>
+<Base title="Home" description="The Dracula — A powerful YouTube downloader CLI + TUI powered by yt-dlp. Download videos, audio, and playlists from the terminal.">
+  <!-- Hero Band with Code Rain & Mesh Gradient -->
+  <section class="relative overflow-hidden pt-16 sm:pt-28 pb-16 sm:pb-24 px-4 sm:px-6 min-h-[580px] sm:min-h-[660px] flex items-center border-b border-hairline/60">
+    <CodeRain />
+    <div class="absolute inset-0 vercel-mesh-gradient opacity-90 pointer-events-none z-0"></div>
+    <div class="absolute inset-0 vercel-grid-pattern opacity-40 pointer-events-none z-0"></div>
 
-    <div class="max-w-[900px] mx-auto text-center relative z-10">
-      <div class="inline-flex items-center gap-2 bg-canvas-soft-2/80 border border-hairline/60 rounded-full px-4 py-1.5 mb-8 animate-fade-in-down">
-        <span class="w-2 h-2 rounded-full bg-dracula-green animate-pulse"></span>
-        <span class="font-mono text-[12px] text-body">v1.0.4</span>
-        <span class="text-hairline-strong">·</span>
-        <span class="text-[12px] text-body">Powered by yt-dlp</span>
+    <div class="max-w-[920px] mx-auto text-center relative z-10 w-full">
+      <div class="inline-flex items-center gap-2 bg-canvas-soft-2/90 border border-hairline/80 rounded-full px-3.5 py-1.5 mb-6 sm:mb-8 animate-fade-in-down shadow-sm max-w-full overflow-hidden">
+        <span class="w-2 h-2 rounded-full bg-dracula-green animate-pulse shrink-0"></span>
+        <span class="font-mono text-[11px] sm:text-[12px] text-body truncate">v1.1.2 Release</span>
+        <span class="text-hairline-strong shrink-0">·</span>
+        <span class="text-[11px] sm:text-[12px] text-muted flex items-center gap-1 shrink-0">
+          <Sparkles class="w-3 h-3 text-dracula-red" />
+          <span>Powered by yt-dlp</span>
+        </span>
       </div>
 
-      <h1 class="text-[44px] md:text-[68px] font-bold leading-[1.05] tracking-[-0.03em] text-ink mb-6 hero-text">
-        <span class="hero-line">Download YouTube videos</span>
+      <h1 class="text-[32px] xs:text-[38px] sm:text-[56px] md:text-[68px] lg:text-[76px] font-semibold leading-[1.08] tracking-display-xl text-ink mb-6 hero-text break-words">
+        <span class="hero-line">Download YouTube videos.</span>
         <br class="hidden sm:block" />
-        <span class="hero-line bg-gradient-to-r from-dracula-red via-dracula-pink to-dracula-purple bg-clip-text text-transparent">from your terminal.</span>
+        <span class="hero-line text-transparent bg-clip-text bg-gradient-to-r from-dracula-red via-dracula-pink to-dracula-purple">Build from your terminal.</span>
       </h1>
 
-      <p class="text-[17px] text-body max-w-[520px] mx-auto mb-10 leading-[1.7] hero-subtitle">
-        The Dracula is a powerful CLI + TUI for downloading videos, audio, and playlists. Dark-themed, fast, and built for developers.
+      <p class="text-[15px] sm:text-[17px] md:text-[18px] text-body max-w-[560px] mx-auto mb-8 sm:mb-10 leading-[1.65] hero-subtitle font-normal px-2">
+        The Dracula is a high-performance CLI + TUI for downloading videos, extracting audio, and batch processing playlists with zero bloat.
       </p>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-300">
-        <a href="/installation" class="group bg-dracula-red text-white text-[15px] font-semibold px-7 py-3.5 rounded-xl hover:bg-dracula-red-deep transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,45,85,0.4)] hover:-translate-y-0.5 no-underline flex items-center gap-2">
-          Get Started
-          <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-fade-in-up delay-300 w-full sm:w-auto px-4">
+        <a href="/installation" class="group bg-ink text-canvas text-[14px] font-semibold px-8 py-3.5 rounded-full hover:bg-white hover:text-black transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-[1.02] no-underline flex items-center justify-center gap-2 w-full sm:w-auto">
+          <span>Get Started</span>
+          <ArrowRight class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </a>
-        <a href="/cli" class="bg-canvas-soft-2 text-ink text-[15px] font-semibold px-7 py-3.5 rounded-xl border border-hairline/60 hover:border-dracula-red/40 hover:bg-canvas-soft-2/80 transition-all duration-300 hover:-translate-y-0.5 no-underline">
-          View CLI Docs
+        <a href="/cli" class="bg-canvas-soft text-ink text-[14px] font-semibold px-8 py-3.5 rounded-full border border-hairline/80 hover:border-hairline-strong hover:bg-canvas-soft-2 transition-all duration-300 hover:scale-[1.02] no-underline flex items-center justify-center gap-2 w-full sm:w-auto">
+          <Terminal class="w-4 h-4 text-dracula-red" />
+          <span>View CLI Reference</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Install Preview -->
-  <section class="px-6 pb-24">
-    <div class="max-w-[680px] mx-auto animate-fade-in-up delay-400">
-      <SpotlightCard class="overflow-x-auto shadow-elevated">
-        <div class="flex items-center gap-2 mb-4">
-          <div class="w-3 h-3 rounded-full bg-dracula-red/60"></div>
-          <div class="w-3 h-3 rounded-full bg-dracula-orange/60"></div>
-          <div class="w-3 h-3 rounded-full bg-dracula-green/60"></div>
-          <span class="ml-3 text-[11px] font-mono text-muted">terminal</span>
+  <!-- Vercel Terminal Mockup -->
+  <section class="px-4 sm:px-6 py-14 sm:py-20 border-b border-hairline/60 bg-canvas-soft/60">
+    <div class="max-w-[780px] mx-auto animate-fade-in-up delay-400 w-full">
+      <div class="rounded-xl border border-hairline/80 bg-[#09090b] overflow-hidden shadow-elevated w-full">
+        <div class="flex items-center justify-between px-3.5 sm:px-4 py-2.5 sm:py-3 border-b border-hairline/60 bg-[#121215]">
+          <div class="flex items-center gap-2 min-w-0">
+            <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-hairline-strong/40 shrink-0"></div>
+            <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-hairline-strong/40 shrink-0"></div>
+            <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-hairline-strong/40 shrink-0"></div>
+            <span class="ml-1.5 sm:ml-2 text-[11px] sm:text-[12px] font-mono text-muted flex items-center gap-1.5 truncate">
+              <Terminal class="w-3.5 h-3.5 text-dracula-red shrink-0" />
+              <span class="truncate">dracula-dl terminal</span>
+            </span>
+          </div>
+          <span class="text-[10px] sm:text-[11px] font-mono text-dracula-red bg-dracula-red-soft px-2 py-0.5 rounded-full border border-dracula-red/30 shrink-0">bash</span>
         </div>
-        <pre class="text-[14px] font-mono text-ink/80 leading-[1.7]"><code><span class="text-dracula-green">$</span> pip install dracula-dl
-<span class="text-dracula-green">$</span> dracula
-
-<span class="text-muted">  🧛 The Dracula  ·  YouTube Downloader CLI  v1.0.4
-     Powered by yt-dlp  ·  Rising from the dark...</span></code></pre>
-      </SpotlightCard>
+        <div class="p-4 sm:p-6 font-mono text-[12px] sm:text-[13.5px] leading-relaxed text-zinc-100 overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2 whitespace-nowrap">
+            <span class="text-dracula-green font-bold">$</span>
+            <span class="text-white font-medium">pip install dracula-dl</span>
+          </div>
+          <div class="flex items-center gap-2 mb-4 whitespace-nowrap">
+            <span class="text-dracula-green font-bold">$</span>
+            <span class="text-white font-medium">dracula video -u "https://youtu.be/..." -q 1080p --embed-subs</span>
+          </div>
+          <div class="text-zinc-300 text-[11.5px] sm:text-[13px] border-t border-hairline/50 pt-3 sm:pt-4 mt-3 sm:mt-4 space-y-1">
+            <p class="text-dracula-red font-semibold">  🧛 The Dracula  ·  YouTube Downloader CLI  v1.1.2</p>
+            <p class="text-dracula-cyan">  ℹ  Format  : 1080p (Full HD)</p>
+            <p class="text-dracula-green">  ✔  Downloading: Rick Astley - Never Gonna Give You Up (100%)</p>
+            <p class="text-dracula-green font-medium">  ✔  Done! Saved to ~/Downloads/Dracula/</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="px-6 pb-28">
+  <!-- Core Features Grid -->
+  <section class="px-4 sm:px-6 py-20 sm:py-28 border-b border-hairline/60">
     <div class="max-w-[1400px] mx-auto">
-      <div class="text-center mb-14" data-animate>
-        <h2 class="text-[32px] md:text-[40px] font-bold tracking-[-0.02em] text-ink mb-3">Everything you need.</h2>
-        <p class="text-[16px] text-body max-w-[480px] mx-auto leading-[1.6]">Download videos, extract audio, manage playlists — all from the command line.</p>
+      <div class="text-center mb-12 sm:mb-16" data-animate>
+        <p class="font-mono text-[11px] sm:text-[12px] text-dracula-red uppercase tracking-wider mb-2 sm:mb-3">Core Infrastructure</p>
+        <h2 class="text-[28px] sm:text-[38px] md:text-[48px] font-semibold tracking-display-lg text-ink mb-3 sm:mb-4">Everything you need. Nothing you don't.</h2>
+        <p class="text-[14px] sm:text-[16px] text-body max-w-[520px] mx-auto leading-[1.6] px-2">Engineered for reliability, simplicity, and speed. Built directly on yt-dlp.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {[
-          { icon: '🎬', title: 'Video Download', desc: 'Download any YouTube video with quality selection from 360p to 4K.' },
-          { icon: '🎵', title: 'Audio Extract', desc: 'Extract audio as MP3, M4A, WAV, FLAC, or OPUS with configurable bitrate.' },
-          { icon: '📋', title: 'Playlist Support', desc: 'Download entire playlists with range selection and automatic file naming.' },
-          { icon: '🎨', title: 'Rich TUI', desc: 'Colored progress bars, ASCII art header, and interactive menu-driven mode.' },
-          { icon: '📊', title: 'Format Lister', desc: 'View all available formats, resolutions, codecs, and file sizes before downloading.' },
-          { icon: '🖥️', title: 'Interactive Mode', desc: 'Menu-driven TUI for beginners — no command-line arguments needed.' },
-        ].map((f) => (
-          <SpotlightCard data-animate>
-            <div class="w-11 h-11 rounded-xl bg-dracula-red/10 border border-dracula-red/20 flex items-center justify-center mb-4 group-hover:bg-dracula-red/20 transition-colors duration-300">
-              <span class="text-lg">{f.icon}</span>
+          { icon: Video, title: 'Video Download', desc: 'Download YouTube videos from 360p to 4K with format selection, subtitle embedding, and cover thumbnails.' },
+          { icon: Music, title: 'Audio Extraction', desc: 'Extract high-fidelity audio as MP3, M4A, WAV, FLAC, or OPUS with configurable bitrates (128-320kbps).' },
+          { icon: ListOrdered, title: 'Playlists & Retry', desc: 'Download full playlists sequentially with item range filtering and automatic --retry-failed re-attempts.' },
+          { icon: Package, title: 'Batch Processing', desc: 'Process dozens of URLs sequentially from text files (urls.txt) or command-line arguments with summary tables.' },
+          { icon: Settings, title: 'Config & History', desc: 'Store output paths and defaults in ~/.config/dracula/config.toml, logged automatically to JSONL history.' },
+          { icon: Terminal, title: 'Rich TUI & CLI', desc: 'Menu-driven interactive mode, live progress bars, red error panels with actionable hints, and shell completion.' },
+        ].map((f, i) => (
+          <SpotlightCard data-animate featured={i === 0}>
+            <div class="w-10 h-10 rounded-lg bg-canvas-soft-2 border border-hairline/80 flex items-center justify-center mb-4 sm:mb-5 text-dracula-red">
+              <f.icon class="w-5 h-5" />
             </div>
-            <h3 class="text-[16px] font-semibold text-ink mb-2">{f.title}</h3>
-            <p class="text-[14px] text-body leading-[1.6]">{f.desc}</p>
+            <h3 class="text-[17px] sm:text-[18px] font-semibold text-ink mb-2 tracking-tight">{f.title}</h3>
+            <p class="text-[13px] sm:text-[14px] text-body leading-[1.65]">{f.desc}</p>
           </SpotlightCard>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Quick Start -->
-  <section class="px-6 pb-28">
+  <!-- Quick Start Section -->
+  <section class="px-4 sm:px-6 py-20 sm:py-28 border-b border-hairline/60 bg-canvas-soft/40">
     <div class="max-w-[1400px] mx-auto" data-animate>
-      <SpotlightCard class="p-8 md:p-12 !rounded-3xl">
-        <div class="absolute top-0 right-0 w-[300px] h-[300px] bg-dracula-red/[0.04] rounded-full blur-[80px] pointer-events-none"></div>
-        <h2 class="text-[28px] font-bold tracking-[-0.02em] text-ink mb-2 relative">Quick Start</h2>
-        <p class="text-[16px] text-body mb-8 relative">Get up and running in two commands.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
-          <div class="bg-canvas-soft-2 border border-hairline/50 rounded-xl p-5 hover:border-dracula-red/20 transition-all duration-300">
-            <p class="font-mono text-[11px] text-dracula-red uppercase tracking-widest mb-3">Install</p>
-            <pre class="text-[14px] font-mono text-ink/80"><code><span class="text-dracula-green">$</span> pip install dracula-dl</code></pre>
+      <SpotlightCard class="p-6 sm:p-8 md:p-12 !rounded-2xl" featured={true}>
+        <div class="max-w-[600px] mb-6 sm:mb-8">
+          <p class="font-mono text-[11px] sm:text-[12px] text-dracula-red uppercase tracking-wider mb-2">Deploy in seconds</p>
+          <h2 class="text-[26px] sm:text-[34px] md:text-[40px] font-semibold tracking-display-lg text-ink mb-2 sm:mb-3">Quick Start.</h2>
+          <p class="text-[14px] sm:text-[16px] text-body leading-[1.6]">Install globally with pip and launch the Dracula TUI instantly.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-[#09090b] border border-hairline/80 rounded-xl p-4 sm:p-6 overflow-x-auto">
+            <p class="font-mono text-[11px] text-muted uppercase tracking-wider mb-2 sm:mb-3 flex items-center gap-1.5">
+              <CheckCircle2 class="w-3.5 h-3.5 text-dracula-green shrink-0" />
+              <span>Step 1 — Install</span>
+            </p>
+            <pre class="text-[13px] sm:text-[14px] font-mono text-zinc-100"><code><span class="text-dracula-green font-bold">$</span> pip install dracula-dl</code></pre>
           </div>
-          <div class="bg-canvas-soft-2 border border-hairline/50 rounded-xl p-5 hover:border-dracula-red/20 transition-all duration-300">
-            <p class="font-mono text-[11px] text-dracula-red uppercase tracking-widest mb-3">Run</p>
-            <pre class="text-[14px] font-mono text-ink/80"><code><span class="text-dracula-green">$</span> dracula</code></pre>
+          <div class="bg-[#09090b] border border-hairline/80 rounded-xl p-4 sm:p-6 overflow-x-auto">
+            <p class="font-mono text-[11px] text-muted uppercase tracking-wider mb-2 sm:mb-3 flex items-center gap-1.5">
+              <CheckCircle2 class="w-3.5 h-3.5 text-dracula-green shrink-0" />
+              <span>Step 2 — Launch</span>
+            </p>
+            <pre class="text-[13px] sm:text-[14px] font-mono text-zinc-100"><code><span class="text-dracula-green font-bold">$</span> dracula</code></pre>
           </div>
         </div>
-        <p class="text-[14px] text-body mt-6 relative">Requires Python 3.10+ and FFmpeg for audio extraction.</p>
       </SpotlightCard>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="px-6 pb-16">
-    <div class="max-w-[700px] mx-auto text-center" data-animate>
-      <SpotlightCard class="!rounded-3xl p-10 md:p-14">
-        <div class="absolute inset-0 bg-gradient-to-br from-dracula-red/10 via-transparent to-dracula-purple/5 rounded-3xl pointer-events-none"></div>
-        <div class="absolute inset-0 bg-dracula-red/[0.03] rounded-3xl animate-glow-pulse pointer-events-none"></div>
-        <h2 class="text-[28px] font-bold tracking-[-0.02em] text-ink mb-3 relative">Ready to download?</h2>
-        <p class="text-[16px] text-body mb-8 relative">Join developers who use The Dracula every day.</p>
-        <a href="/installation" class="relative inline-flex items-center gap-2 bg-dracula-red text-white text-[15px] font-semibold px-8 py-3.5 rounded-xl hover:bg-dracula-red-deep transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,45,85,0.4)] hover:-translate-y-0.5 no-underline">
-          Start Downloading
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+  <!-- Vercel CTA Section -->
+  <section class="px-4 sm:px-6 py-20 sm:py-32">
+    <div class="max-w-[800px] mx-auto text-center" data-animate>
+      <div class="p-8 sm:p-12 md:p-16 rounded-2xl border border-hairline/80 bg-canvas-soft-2/80 relative overflow-hidden shadow-elevated">
+        <div class="absolute inset-0 vercel-mesh-gradient opacity-60 pointer-events-none"></div>
+        <h2 class="text-[28px] sm:text-[38px] md:text-[48px] font-semibold tracking-display-lg text-ink mb-3 sm:mb-4 relative z-10">Start downloading in darkness.</h2>
+        <p class="text-[14px] sm:text-[16px] text-body mb-6 sm:mb-8 max-w-[480px] mx-auto leading-[1.6] relative z-10 px-2">Open source, lightweight, and built for developers who demand command-line efficiency.</p>
+        <a href="/installation" class="relative z-10 inline-flex items-center justify-center gap-2 bg-ink text-canvas text-[14px] font-semibold px-8 py-3.5 rounded-full hover:bg-white hover:text-black transition-all duration-300 hover:scale-[1.02] no-underline shadow-lg w-full sm:w-auto">
+          <span>Get Started Now</span>
+          <ArrowRight class="w-4 h-4" />
         </a>
-      </SpotlightCard>
+      </div>
     </div>
   </section>
 </Base>
