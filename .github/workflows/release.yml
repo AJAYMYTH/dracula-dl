@@ -1,0 +1,91 @@
+name: Release on Version Bump
+
+# Triggers on pushes to main that change pyproject.toml
+on:
+  push:
+    branches: [main]
+    paths: [pyproject.toml]
+
+permissions:
+  contents: write          # needed to create tags & releases
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0     # full history so we can compare versions
+
+      - name: Get current version from pyproject.toml
+        id: version
+        run: |
+          VERSION=$(grep -Po '(?<=^version\s*=\s*\")([^\"]+)' pyproject.toml)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION"    >> "$GITHUB_OUTPUT"
+          echo "📦 Detected version: $VERSION"
+
+      - name: Check if tag already exists
+        id: check_tag
+        run: |
+          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "⏭️  Tag v${{ steps.version.outputs.version }} already exists — skipping."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "🆕 Tag v${{ steps.version.outputs.version }} is new — will create release."
+          fi
+
+      - name: Extract changelog for this version
+        if: steps.check_tag.outputs.exists == 'false'
+        id: changelog
+        run: |
+          # Extract the section between this version header and the next "## [" header
+          VERSION="${{ steps.version.outputs.version }}"
+          NOTES=$(awk "/^## \\[$VERSION\\]/{found=1; next} /^## \\[/{if(found) exit} found{print}" CHANGELOG.md)
+          if [ -z "$NOTES" ]; then
+            NOTES="Release v$VERSION"
+          fi
+          # Write to file to avoid escaping issues
+          echo "$NOTES" > /tmp/release_notes.md
+          echo "📝 Release notes extracted."
+
+      - name: Create tag
+        if: steps.check_tag.outputs.exists == 'false'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "${{ steps.version.outputs.tag }}" -m "Release ${{ steps.version.outputs.tag }}"
+          git push origin "${{ steps.version.outputs.tag }}"
+
+      - name: Create GitHub Release
+        if: steps.check_tag.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+            --title "${{ steps.version.outputs.tag }}" \
+            --notes-file /tmp/release_notes.md
+
+      # ── Optional: auto-publish to PyPI ──
+      # Uncomment the steps below and add your PyPI token as a
+      # repository secret named PYPI_API_TOKEN to enable auto-publish.
+      #
+      # - name: Set up Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: "3.12"
+      #
+      # - name: Build package
+      #   run: |
+      #     pip install build
+      #     python -m build
+      #
+      # - name: Publish to PyPI
+      #   env:
+      #     TWINE_USERNAME: __token__
+      #     TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+      #   run: |
+      #     pip install twine
+      #     twine upload dist/*
