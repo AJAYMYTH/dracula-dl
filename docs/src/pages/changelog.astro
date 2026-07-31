@@ -15,37 +15,34 @@ import { Rocket, Zap, Bug, Clock } from 'lucide-astro';
       <p class="text-[17px] text-body leading-[1.65]">All notable updates, feature additions, and bug fixes for <code class="bg-canvas-soft-2 px-2 py-0.5 rounded text-ink font-mono text-[14px]">dracula-dl</code>.</p>
     </div>
 
-    <!-- Release 1.1.2 -->
+    <!-- Release 1.1.3 -->
     <div class="border border-hairline/80 bg-canvas-soft-2/80 rounded-2xl p-8 mb-12 shadow-elevated" data-animate>
       <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-hairline/60 pb-5">
         <div class="flex items-center gap-3">
-          <span class="text-[22px] font-semibold tracking-tight text-ink">v1.1.2</span>
+          <span class="text-[22px] font-semibold tracking-tight text-ink">v1.1.3</span>
           <span class="bg-dracula-red-soft border border-dracula-red/30 text-dracula-red font-mono text-[11px] font-semibold px-3 py-0.5 rounded-full">Latest Release</span>
         </div>
-        <span class="font-mono text-[12px] text-muted">July 28, 2026</span>
+        <span class="font-mono text-[12px] text-muted">July 31, 2026</span>
       </div>
 
       <div class="space-y-8">
         <div>
           <h3 class="flex items-center gap-2 text-[16px] font-semibold text-ink mb-4">
-            <Rocket class="w-4 h-4 text-dracula-red" />
-            <span>Major Enhancements in v1.1.2</span>
+            <Bug class="w-4 h-4 text-dracula-red" />
+            <span>Subtitle Downloading & Embedding Fixes</span>
           </h3>
           <ul class="space-y-3.5 text-[14px] text-body leading-[1.65]">
             <li class="pl-4 border-l-2 border-dracula-red/50">
-              <strong class="text-ink">Fixed Playlist Audio Bitrate Encoding</strong> — Resolved an issue where audio-only playlist downloads ignored custom bitrate flags and hardcoded 192kbps.
+              <strong class="text-ink">Subtitle Embedding Fixed</strong> — Fixed critical bug where <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">opts.update(extra)</code> overwrote the subtitle/thumbnail postprocessors list, causing <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">FFmpegEmbedSubtitle</code> and <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">EmbedThumbnail</code> to be silently dropped.
             </li>
             <li class="pl-4 border-l-2 border-dracula-red/50">
-              <strong class="text-ink">Unified Package Architecture</strong> — Root launcher scripts (<code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">dracula.py</code>, <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">tui.py</code>, <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">setup_check.py</code>) are now thin wrappers importing from <code class="bg-[#18181b] text-dracula-cyan px-1.5 py-0.5 rounded font-mono text-[12px]">dracula_dl</code> to guarantee 100% code parity.
+              <strong class="text-ink">Subtitle Format Conversion</strong> — Added <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">FFmpegSubtitlesConvertor</code> (to SRT) before embed and set <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">subtitlesformat</code> to <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">srt/ass/best</code> for reliable MP4/MKV embedding.
             </li>
             <li class="pl-4 border-l-2 border-dracula-red/50">
-              <strong class="text-ink">Dedicated Batch Mode & Subcommands</strong> — Added <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">dracula batch -i urls.txt</code>, <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">dracula history -n 50</code>, and <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">dracula completion</code> subcommands.
+              <strong class="text-ink"><code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">--embed-subs</code> Without <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">--subs</code></strong> — Using <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">--embed-subs</code> alone now auto-enables auto-generated subtitle download instead of silently doing nothing.
             </li>
             <li class="pl-4 border-l-2 border-dracula-red/50">
-              <strong class="text-ink">Subtitles & Thumbnail Embedding Flags</strong> — Introduced <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">--subs</code>, <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">--auto-subs</code>, <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">--embed-subs</code>, and <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">--embed-thumbnail</code> flags across video, audio, playlist, and batch modes.
-            </li>
-            <li class="pl-4 border-l-2 border-dracula-red/50">
-              <strong class="text-ink">Dry-Run, Rate Limiting & Playlist Retries</strong> — Added <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">--dry-run</code> / <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">--simulate</code>, <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">--limit-rate</code>, and <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">dracula playlist --retry-failed</code>.
+              <strong class="text-ink">TUI Auto-Generated Subtitles</strong> — Added "Include auto-generated subtitles?" prompt and <code class="bg-[#18181b] text-white px-1.5 py-0.5 rounded font-mono text-[12px]">writeautomaticsub</code> support to the interactive TUI.
             </li>
           </ul>
         </div>
@@ -60,32 +57,21 @@ import { Rocket, Zap, Bug, Clock } from 'lucide-astro';
             defaultValue="pip install --upgrade dracula-dl"
           />
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-          <div class="bg-canvas-soft/80 p-4 rounded-xl border border-hairline/60">
-            <h4 class="text-[14px] font-semibold text-ink mb-2 flex items-center gap-1.5">
-              <Zap class="w-4 h-4 text-dracula-orange" />
-              <span>Refactoring & Quality</span>
-            </h4>
-            <ul class="text-[13px] text-body space-y-1.5 list-disc list-inside">
-              <li>Input URL validation before yt-dlp invocation</li>
-              <li>Strict exit code discipline (<code class="font-mono text-[11px]">sys.exit(1)</code>)</li>
-              <li>Debug logging in <code class="font-mono text-[11px]">~/.config/dracula/debug.log</code></li>
-            </ul>
-          </div>
-          <div class="bg-canvas-soft/80 p-4 rounded-xl border border-hairline/60">
-            <h4 class="text-[14px] font-semibold text-ink mb-2 flex items-center gap-1.5">
-              <Bug class="w-4 h-4 text-dracula-red" />
-              <span>Bug Fixes</span>
-            </h4>
-            <ul class="text-[13px] text-body space-y-1.5 list-disc list-inside">
-              <li>Fixed audio bitrate override in playlist downloads</li>
-              <li>Fixed view count formatting for missing metadata</li>
-              <li>Handled missing terminal styling gracefully</li>
-            </ul>
-          </div>
-        </div>
       </div>
+    </div>
+
+    <!-- Release 1.1.2 -->
+    <div class="border border-hairline/60 bg-canvas-soft/50 rounded-2xl p-8 mb-12" data-animate>
+      <div class="flex items-center justify-between mb-4 border-b border-hairline/50 pb-4">
+        <div class="flex items-center gap-3">
+          <span class="text-[18px] font-semibold text-ink">v1.1.2</span>
+          <span class="bg-canvas-soft-2 text-muted font-mono text-[11px] px-2.5 py-0.5 rounded-full">Previous Release</span>
+        </div>
+        <span class="font-mono text-[12px] text-muted">July 28, 2026</span>
+      </div>
+      <p class="text-[14px] text-body leading-[1.65]">
+        Config preference persistence, batch mode & subcommands, subtitle & thumbnail flags, dry-run, rate limiting, playlist retries, and unified package architecture.
+      </p>
     </div>
 
     <!-- Release 1.1.0 -->
