@@ -384,8 +384,12 @@ def screen_video():
     embed_thumb = ask_confirm("Embed thumbnail?", default=False)
     sub_choice = ask_confirm("Download subtitles?", default=False)
     subs_lang = None
+    use_auto_subs = False
+    embed_subs = False
     if sub_choice:
         subs_lang = ask("Subtitle language codes (comma separated, e.g. en,es)", default="en")
+        use_auto_subs = ask_confirm("Include auto-generated subtitles?", default=True)
+        embed_subs = ask_confirm("Embed subtitles into video?", default=True)
 
     info("Fetching video info…")
     title = _get_title(url)
@@ -401,8 +405,16 @@ def screen_video():
     if subs_lang:
         opts["writesubtitles"] = True
         opts["subtitleslangs"] = [s.strip() for s in subs_lang.split(',') if s.strip()]
-        if ask_confirm("Embed subtitles into video?", default=True):
-            opts.setdefault("postprocessors", []).append({'key': 'FFmpegEmbedSubtitle'})
+        opts["subtitlesformat"] = "srt/ass/best"
+        if use_auto_subs:
+            opts["writeautomaticsub"] = True
+        if embed_subs:
+            # Convert subs to srt first, then embed — order matters
+            opts.setdefault("postprocessors", []).append({
+                'key': 'FFmpegSubtitlesConvertor',
+                'format': 'srt',
+            })
+            opts["postprocessors"].append({'key': 'FFmpegEmbedSubtitle'})
 
     _do_download(opts, [url], title or url, category="video", quality_meta=quality)
     _back_prompt()

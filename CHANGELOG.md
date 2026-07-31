@@ -5,6 +5,16 @@ All notable changes to **The Dracula YouTube Downloader (`dracula-dl`)** will be
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.3] - 2026-07-31
+
+### 🐛 Bug Fixes
+* **Subtitle Embedding Fixed**: Fixed critical bug where `opts.update(extra)` overwrote the subtitle/thumbnail postprocessors list, causing `FFmpegEmbedSubtitle` and `EmbedThumbnail` to be silently dropped.
+* **Subtitle Format Conversion**: Added `FFmpegSubtitlesConvertor` (to srt) before `FFmpegEmbedSubtitle` and set `subtitlesformat` to `srt/ass/best` for reliable MP4/MKV embedding. Previously, vtt/json3 subs caused silent embedding failures.
+* **`--embed-subs` Without `--subs`**: Using `--embed-subs` alone now auto-enables auto-generated subtitle download instead of silently doing nothing.
+* **TUI Auto-Generated Subtitles**: Added "Include auto-generated subtitles?" prompt and `writeautomaticsub` support to the TUI, so users get subtitles even when no manual subs are available.
+
+---
+
 ## [1.1.2] - 2026-07-28
 
 ### 🐛 Bug Fixes & Improvements

@@ -454,24 +454,41 @@ def build_base_opts(
         if rate_bytes:
             opts['ratelimit'] = rate_bytes
 
+    # Merge extra opts early, but handle postprocessors specially so we
+    # don't overwrite the ones we're about to add for subs / thumbnails.
+    if extra:
+        extra_pp = extra.pop('postprocessors', None)
+        opts.update(extra)
+        # Seed the postprocessors list with any that came from the caller
+        if extra_pp:
+            opts.setdefault('postprocessors', []).extend(extra_pp)
+
     # Subtitles
+    # --embed-subs alone should still trigger subtitle download
+    if embed_subs and not subs and not auto_subs:
+        auto_subs = True  # fall back to auto-generated subs
+
     if subs or auto_subs:
         opts['writesubtitles'] = True
         if auto_subs:
             opts['writeautomaticsub'] = True
         if subs:
             opts['subtitleslangs'] = [lang.strip() for lang in subs.split(',') if lang.strip()]
+        # Prefer srt for maximum container compatibility (mp4/mkv)
+        opts['subtitlesformat'] = 'srt/ass/best'
 
         if embed_subs:
-            opts.setdefault('postprocessors', []).append({'key': 'FFmpegEmbedSubtitle'})
+            # Convert subs to srt first, then embed — order matters
+            opts.setdefault('postprocessors', []).append({
+                'key': 'FFmpegSubtitlesConvertor',
+                'format': 'srt',
+            })
+            opts['postprocessors'].append({'key': 'FFmpegEmbedSubtitle'})
 
     # Thumbnail embedding
     if embed_thumbnail:
         opts['writethumbnail'] = True
         opts.setdefault('postprocessors', []).append({'key': 'EmbedThumbnail'})
-
-    if extra:
-        opts.update(extra)
 
     return opts
 
